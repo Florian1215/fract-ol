@@ -19,6 +19,8 @@ void	mlx_put_pixel_img(t_img *img, t_co co, int color)
 
 	x = (int)co.x;
 	y = (int)co.y;
+	if (x > WIN || y > WIN || y < 0 || x < 0)
+		return ;
 	*(unsigned int *)(img->addr + (y * img->line_length + x * (\
 img->bits_per_pixel / 8))) = color;
 }

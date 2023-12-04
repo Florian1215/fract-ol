@@ -18,7 +18,6 @@ void	init_heart(t_fractal *f)
 {
 	f->set = HEART;
 	f->sequence = heart;
-	f->offset_menu = (t_co){-125, -180};
 	f->animation_c.start = (t_co){-1, 2};
 	f->preset = preset_heart;
 	f->max_preset = PRESET_5;

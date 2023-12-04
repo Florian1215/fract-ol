@@ -18,7 +18,6 @@ void	init_burning_shipe(t_fractal *f)
 	f->plan.start = (t_co){-2.4, 1.6};
 	f->plan.end = (t_co){1.6, -2.4};
 	f->sequence = burning_shipe;
-	f->offset_menu = (t_co){-200, -167};
 	f->max_preset = PRESET_0;
 	f->color = RED;
 	f->name = "Burning Ship";

@@ -18,6 +18,11 @@ int			mouse_event_release(int button, int x, int y, t_data *data);
 int			mouse_event_motion(int x, int y, t_data *data);
 int			key_event(int k, t_data *data);
 static int	hook_loop(t_data *data);
+void		render_slide(t_data *data);
+void		menu_animation(t_data *data);
+void		hover_animation(t_data *data);
+void		c_animation(t_data *data);
+void		reset_animation(t_data *data);
 t_bool		is_hover_animation(t_hover *hover);
 
 void	set_hook(t_data *data)
@@ -39,6 +44,8 @@ static int	hook_loop(t_data *data)
 	start_render = get_timestamp();
 	if (data->slide.animation)
 		render_slide(data);
+	else if (data->menu.animation)
+		menu_animation(data);
 	else if (data->in_menu && is_hover_animation(data->hover))
 		hover_animation(data);
 	else

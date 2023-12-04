@@ -18,7 +18,6 @@ void	init_mandelbrot(t_fractal *f)
 	f->plan.start.x = -2.2;
 	f->plan.end.x = 1.8;
 	f->sequence = mandelbrot;
-	f->offset_menu = (t_co){-200, -122};
 	f->max_preset = PRESET_0;
 	f->color = GREEN;
 	f->offset_name = 20;

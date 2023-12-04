@@ -32,7 +32,7 @@ void	render_fractal(t_data *data)
 	i = -1;
 	while (++i < 8)
 		pthread_join(t[i].thread, NULL);
-	if (!data->slide.animation)
+	if (!data->slide.animation && !data->menu.animation)
 		mlx_put_image_to_window(data->mlx_ptr,
 			data->win_ptr, data->img.img, 0, 0);
 	if (data->update)
@@ -44,9 +44,7 @@ static void	create_fractal(t_thread *t)
 	t_co	i;
 	t_co	r;
 
-
-	r = (t_co){(t->data->f->plan.end.x - t->data->f->plan.start.x) / (\
-WIN - 1), (t->data->f->plan.end.y - t->data->f->plan.start.y) / (WIN - 1)};
+	r = get_r(t->data->f);
 	while (TRUE)
 	{
 		pthread_mutex_lock(&t->data->mutex_line);

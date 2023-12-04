@@ -19,7 +19,7 @@ void	init_hovers(t_data *data)
 	i = POS_1;
 	while (i < 4)
 	{
-		data->hover[i].is_on = FALSE;
+		data->hover[i].is_active = FALSE;
 		data->hover[i].animation = FALSE;
 		data->hover[i].hover = FALSE;
 		i++;

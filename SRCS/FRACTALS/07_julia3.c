@@ -18,14 +18,12 @@ void	init_julia3(t_fractal *f)
 {
 	f->set = JULIA3;
 	f->sequence = julia3;
-	f->offset_menu = (t_co){-110, -120};
 	f->animation_c.start = (t_co){-2, -2};
 	f->preset = preset_julia3;
 	f->max_preset = PRESET_8;
 	f->color = GREEN_BLUE;
 	f->name = "Julia 3";
 	f->offset_name = 35;
-	f->size_zoom = 1.5;
 }
 
 int	julia3(t_data *mlx, t_fractal *frac, t_co z)

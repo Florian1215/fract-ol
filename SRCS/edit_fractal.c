@@ -63,5 +63,11 @@ void	edit_iter(t_data *data, double j)
 	if (res < 10 || res > 500)
 		return ;
 	data->f->max_iter = res;
-	render_fractal(data);
+	data->update = TRUE;
+}
+
+t_co	get_r(t_fractal *f)
+{
+	return ((t_co){(f->plan.end.x - f->plan.start.x) / (WIN - 1), (\
+f->plan.end.y - f->plan.start.y) / (WIN - 1)});
 }

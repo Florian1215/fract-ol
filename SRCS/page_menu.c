@@ -22,10 +22,10 @@ void	set_page(t_data *data, int page)
 	if (page < 0)
 		page = 2;
 	page %= 3;
-	data->menu[POS_1] = menu[page][POS_1];
-	data->menu[POS_2] = menu[page][POS_2];
-	data->menu[POS_3] = menu[page][POS_3];
-	data->menu[POS_4] = menu[page][POS_4];
+	data->menus[POS_1] = menu[page][POS_1];
+	data->menus[POS_2] = menu[page][POS_2];
+	data->menus[POS_3] = menu[page][POS_3];
+	data->menus[POS_4] = menu[page][POS_4];
 	data->page = page;
 	set_menu(data);
 }

@@ -18,12 +18,10 @@ void	init_celtic(t_fractal *f)
 	f->plan.start = (t_co){-2, 1.3};
 	f->plan.end = (t_co){2, -2.7};
 	f->sequence = celtic;
-	f->offset_menu = (t_co){-125, -218};
 	f->color = ELECTRIC_BLUE;
 	f->max_preset = PRESET_0;
 	f->name = "Celtic";
 	f->offset_name = 18;
-	f->size_zoom = 1.7;
 }
 
 int	celtic(t_data *data, t_fractal *frac, t_co c)

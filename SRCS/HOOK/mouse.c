@@ -23,7 +23,10 @@ int	mouse_event_press(int button, int x, int y, t_data *data)
 	if (data->slide.animation || data->reset)
 		return (ERROR);
 	if (data->in_menu && button == LEFT_CLICK)
-		launch_fractal(data, data->menu[select_fractal((t_co){x, y})]);
+	{
+		data->f = data->fractals + data->menus[select_fractal((t_co){x, y})];
+		toggle_menu_animation(data);
+	}
 	else
 		mouse_event_fractal(data, button, (t_co){x, y});
 	return (SUCCESS);

@@ -20,14 +20,12 @@ void	init_buffalo(t_fractal *f)
 	f->plan.start = (t_co){-2.1, 2.1};
 	f->plan.end = (t_co){2.1, -2.1};
 	f->sequence = buffalo;
-	f->offset_menu = (t_co){-125, -122};
 	f->animation_c.start = (t_co){-1, 1};
 	f->preset = preset_buffalo;
 	f->max_preset = PRESET_9;
 	f->color = BLUE_RED;
 	f->name = "Buffalo";
 	f->offset_name = 25;
-	f->size_zoom = 1.85;
 }
 
 int	buffalo(t_data *data, t_fractal *frac, t_co z)

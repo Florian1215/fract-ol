@@ -18,7 +18,6 @@ void	init_mandelbar(t_fractal *f)
 {
 	f->set = MANDELBAR;
 	f->sequence = mandelbar;
-	f->offset_menu = (t_co){-125, -100};
 	f->animation_c.start = (t_co){-2, 2};
 	f->preset = preset_mandelbar;
 	f->max_preset = PRESET_7;

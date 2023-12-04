@@ -18,14 +18,12 @@ void	init_celtic_mandelbar(t_fractal *f)
 {
 	f->set = CELTIC_MANDELBAR;
 	f->sequence = celtic_mandelbar;
-	f->offset_menu = (t_co){-125, -130};
 	f->animation_c.start = (t_co){-2, -2};
 	f->preset = preset_celtic_mandelbar;
 	f->max_preset = PRESET_4;
 	f->color = BLUE_LIGHT;
 	f->name = "Celtic Mandelbar";
 	f->offset_name = 50;
-	f->size_zoom = 1.7;
 }
 
 int	celtic_mandelbar(t_data *data, t_fractal *frac, t_co z)

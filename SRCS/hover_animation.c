@@ -68,7 +68,7 @@ static void	init_new_hover(t_hover *hover, t_pos new)
 	hover[new].unhover = FALSE;
 	hover[new].hover = TRUE;
 	hover[new].animation = TRUE;
-	hover[new].is_on = TRUE;
+	hover[new].is_active = TRUE;
 }
 
 void	hover_animation(t_data *data)
@@ -84,7 +84,7 @@ void	hover_animation(t_data *data)
 		{
 			data->hover[i].animation = FALSE;
 			if (data->hover[i].unhover)
-				data->hover[i].is_on = FALSE;
+				data->hover[i].is_active = FALSE;
 			continue ;
 		}
 		data->hover[i].zoom.value = get_value(data->hover[i].zoom.start, \

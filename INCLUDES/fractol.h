@@ -74,17 +74,47 @@ struct s_slide
 	int		side;
 	int		i;
 	int		start;
-	int		pos;
+	int		value;
 	t_bool	animation;
+};
+
+struct	s_menu_animation
+{
+	int		start;
+	int		end;
+	int		i;
+	int		size;
+	t_pos	pos;
+	t_bool	animation;
+	t_bool	is_toggle;
+	t_co	v;
+	t_co	step;
+};
+
+struct s_hover_value
+{
+	double	value;
+	double	start;
+	double	end;
+};
+
+struct	s_hover
+{
+	struct s_hover_value	zoom;
+	struct s_hover_value	max_iter;
+	int						i;
+	t_bool					hover;
+	t_bool					unhover;
+	t_bool					is_active;
+	t_bool					animation;
 };
 
 void		set_menu(t_data *data);
 void		set_names_fractal(t_data *data, void *img, int x_offset);
+void		toggle_menu_animation(t_data *data);
 int			mouse_event_motion(int x, int y, t_data *data);
 void		set_page(t_data *data, int page);
 void		slide_page(t_data *data, int side);
-void		render_slide(t_data *data);
-void		hover_animation(t_data *data);
 
 // FRACTAL ----------------------------------------------------------
 enum e_fractal
@@ -127,66 +157,45 @@ struct s_fractal
 	t_delta			plan_default;
 	t_delta			animation_plan;
 	t_delta			menu;
-	t_co			offset_menu;
-	t_co			start_launch_plan;
 	char			*name;
 	int				offset_name;
 	int				max_iter;
-	double			size_zoom;
 	t_preset		max_preset;
 	t_co			(*preset)(t_preset);
 	int				(*sequence)(t_data *, t_fractal *, t_co);
 };
 
-struct s_hover_value
-{
-	double	value;
-	double	start;
-	double	end;
-};
-
-struct	s_hover
-{
-	struct s_hover_value	zoom;
-	struct s_hover_value	max_iter;
-	int						i;
-	t_bool					hover;
-	t_bool					unhover;
-	t_bool					is_on;
-	t_bool					animation;
-};
-
 struct s_data
 {
-	void			*mlx_ptr;
-	void			*win_ptr;
-	t_img			img;
-	t_appearance	appearance;
-	t_hover			hover[4];
-	t_fractals		menu[4];
-	t_fractal		fractals[N_FRAC];
-	t_fractal		*f;
-	t_colors		color;
-	t_co			prev_pos;
-	int				offset_color;
-	int				page;
-	t_bool			c_animate;
-	int				i_c;
-	t_bool			reset;
-	t_bool			moving;
-	t_bool			in_menu;
-	t_bool			edit_c;
-	t_slide			slide;
-	t_bool			edit;
-	t_bool			update;
-	t_bool			zoom_size;
-	pthread_mutex_t	mutex_line;
+	void				*mlx_ptr;
+	void				*win_ptr;
+	t_img				img;
+	t_appearance		appearance;
+	t_hover				hover[4];
+	t_fractals			menus[4];
+	t_fractal			fractals[N_FRAC];
+	t_fractal			*f;
+	t_colors			color;
+	t_co				prev_pos;
+	int					offset_color;
+	int					page;
+	t_bool				c_animate;
+	int					i_c;
+	t_bool				reset;
+	t_bool				moving;
+	t_bool				in_menu;
+	t_bool				edit_c;
+	t_slide				slide;
+	t_bool				edit;
+	t_bool				update;
+	t_bool				zoom_size;
+	t_menu_animation	menu;
+	pthread_mutex_t		mutex_line;
 };
 
 void		render_fractal(t_data *data);
-void		c_animation(t_data *data);
-void		launch_fractal(t_data *data, t_fractals set);
-void		reset_animation(t_data *data);
+t_co		get_r(t_fractal *f);
+t_bool		start_reset_animation(t_data *data);
 void		edit_iter(t_data *data, double j);
 void		move(t_data *data, int x, int y);
 
@@ -202,19 +211,6 @@ int			perpendicular_celtic(t_data *data, t_fractal *frac, t_co z);
 int			heart(t_data *data, t_fractal *frac, t_co z);
 int			mandelbar(t_data *data, t_fractal *frac, t_co z);
 int			celtic_mandelbrot(t_data *data, t_fractal *frac, t_co z);
-
-void		init_mandelbrot(t_fractal *f);
-void		init_julia(t_fractal *f);
-void		init_celtic(t_fractal *f);
-void		init_burning_shipe(t_fractal *f);
-void		init_buffalo(t_fractal *f);
-void		init_burning_julia(t_fractal *f);
-void		init_julia3(t_fractal *f);
-void		init_celtic_mandelbar(t_fractal *f);
-void		init_perpendicular_celtic(t_fractal *f);
-void		init_heart(t_fractal *f);
-void		init_mandelbar(t_fractal *f);
-void		init_celtic_mandelbrot(t_fractal *f);
 
 // THREAD -----------------------------------------------------------
 struct s_thread

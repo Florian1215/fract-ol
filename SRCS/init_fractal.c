@@ -14,6 +14,18 @@
 
 static void	init_fractal_default(t_fractal *f, int i);
 static t_co	default_preset(t_preset preset);
+void		init_mandelbrot(t_fractal *f);
+void		init_julia(t_fractal *f);
+void		init_celtic(t_fractal *f);
+void		init_burning_shipe(t_fractal *f);
+void		init_buffalo(t_fractal *f);
+void		init_burning_julia(t_fractal *f);
+void		init_julia3(t_fractal *f);
+void		init_celtic_mandelbar(t_fractal *f);
+void		init_perpendicular_celtic(t_fractal *f);
+void		init_heart(t_fractal *f);
+void		init_mandelbar(t_fractal *f);
+void		init_celtic_mandelbrot(t_fractal *f);
 
 void	init_fractal(t_data *data)
 {
@@ -38,34 +50,16 @@ init_perpendicular_celtic, init_heart, init_mandelbar, init_celtic_mandelbrot};
 
 static void	init_fractal_default(t_fractal *f, int i)
 {
-	f->size_zoom = 1.6;
 	f->plan.start = (t_co){-2, 2};
 	f->plan.end = (t_co){2, -2};
 	f->preset = default_preset;
 	f->max_iter = MAX_ITER;
 	f->menu.start = (t_co){((i % 2) == 1) * HWIN, (i >= 2) * HWIN};
 	f->menu.end = (t_co){f->menu.start.x + HWIN, f->menu.start.y + HWIN};
-	f->start_launch_plan = (t_co){0, 1.3};
 }
 
 t_co	default_preset(t_preset preset)
 {
 	(void)preset;
 	return ((t_co){0, 0});
-}
-
-void	launch_fractal(t_data *data, t_fractals set)
-{
-	if (data->in_menu)
-	{
-		data->f = data->fractals + set;
-		set_color(data, data->f->color);
-	}
-	data->in_menu = FALSE;
-	data->c_animate = TRUE;
-	data->f->animation_c.start.x = data->f->start_launch_plan.x;
-	data->f->animation_c.start.y = data->f->start_launch_plan.y;
-	data->f->animation_c.end.x = data->f->c.x;
-	data->f->animation_c.end.y = data->f->c.y;
-	data->f->plan = data->f->plan_default;
 }

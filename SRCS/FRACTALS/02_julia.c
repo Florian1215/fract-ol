@@ -18,7 +18,6 @@ void	init_julia(t_fractal *f)
 {
 	f->set = JULIA;
 	f->sequence = julia;
-	f->offset_menu = (t_co){-125, -125};
 	f->animation_c.start = (t_co){2, -2};
 	f->preset = preset_julia;
 	f->max_preset = PRESET_6;

@@ -65,7 +65,7 @@ set_blue, set_yellow};
 	else if (color >= 4)
 		color = 3;
 	if (data->in_menu)
-		set = frac->color;
+		set = (frac->color + data->offset_color) % 12;
 	else
 		set = data->color;
 	return (get_gradient(colors_set[set](data->appearance), color, op, cat));

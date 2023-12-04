@@ -29,6 +29,7 @@ typedef struct s_slide			t_slide;
 typedef struct s_hover			t_hover;
 typedef struct s_thread			t_thread;
 typedef struct s_fractal		t_fractal;
+typedef struct s_menu_animation	t_menu_animation;
 typedef struct s_thread_preview	t_thread_preview;
 typedef unsigned long long int	t_time;
 

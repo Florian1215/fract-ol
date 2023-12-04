@@ -23,6 +23,8 @@ void	init_mlx(t_data *data)
 	data->slide.i = 0;
 	data->appearance = LIGHT;
 	data->in_menu = TRUE;
+	data->menu.animation = FALSE;
+	data->menu.is_toggle = FALSE;
 	cancel_animation(data);
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIN, WIN, \
 "Fract-ol");

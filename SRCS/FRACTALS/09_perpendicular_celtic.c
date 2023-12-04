@@ -18,7 +18,6 @@ void	init_perpendicular_celtic(t_fractal *f)
 {
 	f->set = PERPENDICULAR_CELTIC;
 	f->sequence = perpendicular_celtic;
-	f->offset_menu = (t_co){-130, -130};
 	f->animation_c.start = (t_co){2, 2};
 	f->preset = preset_perpendicular_celtic;
 	f->max_preset = PRESET_7;

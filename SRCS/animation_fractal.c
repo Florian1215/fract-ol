@@ -12,11 +12,9 @@
 
 #include "fractol.h"
 
-static void	compute_value(t_data *data, int i, int start_max_iter);
-
 void	c_animation(t_data *data)
 {
-	if (data->i_c == 29)
+	if (data->i_c == FRAME_ANIMATION)
 	{
 		data->i_c = 0;
 		data->c_animate = FALSE;
@@ -28,40 +26,6 @@ data->f->animation_c.end.y, data->i_c);
 	data->f->c.x = get_value(data->f->animation_c.start.x, \
 data->f->animation_c.end.x, data->i_c);
 	data->i_c++;
-}
-
-void	reset_animation(t_data *data)
-{
-	static int	i = 0;
-	static int	start_max_iter = 0;
-
-	if (i == 0)
-	{
-		data->f->animation_plan = data->f->plan;
-		start_max_iter = data->f->max_iter;
-		data->f->max_iter = MAX_ITER;
-	}
-	else if (i == 29)
-	{
-		data->reset = FALSE;
-		i = 0;
-		return ;
-	}
-	compute_value(data, i, start_max_iter);
-	i++;
-}
-
-static void	compute_value(t_data *data, int i, int start_max_iter)
-{
-	data->f->plan.start.x = get_value(data->f->animation_plan.start.x, \
-data->f->plan_default.start.x, i);
-	data->f->plan.start.y = get_value(data->f->animation_plan.start.y, \
-data->f->plan_default.start.y, i);
-	data->f->plan.end.x = get_value(data->f->animation_plan.end.x, \
-data->f->plan_default.end.x, i);
-	data->f->plan.end.y = get_value(data->f->animation_plan.end.y, \
-data->f->plan_default.end.y, i);
-	data->f->max_iter = get_value(MAX_ITER, start_max_iter, i);
 }
 
 double	get_value(double a, double b, int i)

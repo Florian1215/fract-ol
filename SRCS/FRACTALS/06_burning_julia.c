@@ -18,7 +18,6 @@ void	init_burning_julia(t_fractal *f)
 {
 	f->set = BURNING_JULIA;
 	f->sequence = burning_julia;
-	f->offset_menu = (t_co){-125, -125};
 	f->animation_c.start = (t_co){2, -2};
 	f->preset = preset_burning_julia;
 	f->max_preset = PRESET_9;

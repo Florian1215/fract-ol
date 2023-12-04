@@ -18,7 +18,6 @@ void	init_celtic_mandelbrot(t_fractal *f)
 {
 	f->set = CELTIC_MANDELBROT;
 	f->sequence = celtic_mandelbrot;
-	f->offset_menu = (t_co){-125, -125};
 	f->animation_c.start = (t_co){-2, 2};
 	f->preset = preset_celtic_mandelbrot;
 	f->max_preset = PRESET_5;
