@@ -76,6 +76,7 @@ struct s_slide
 	int		start;
 	int		value;
 	t_bool	animation;
+	t_bool	render_img;
 };
 
 struct	s_menu_animation
@@ -191,6 +192,7 @@ struct s_data
 	t_bool				zoom_size;
 	t_menu_animation	menu;
 	pthread_mutex_t		mutex_line;
+	pthread_mutex_t		render;
 };
 
 void		render_fractal(t_data *data);
@@ -198,6 +200,7 @@ t_co		get_r(t_fractal *f);
 t_bool		start_reset_animation(t_data *data);
 void		edit_iter(t_data *data, double j);
 void		move(t_data *data, int x, int y);
+double		cross_multi_plan(double start, double end, double scale);
 
 int			mandelbrot(t_data *data, t_fractal *frac, t_co c);
 int			julia(t_data *data, t_fractal *frac, t_co z);

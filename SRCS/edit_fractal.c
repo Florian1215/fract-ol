@@ -12,8 +12,6 @@
 
 #include "fractol.h"
 
-static double	cross_multi(double start, double end, double scale);
-
 void	zoom(t_data *data, t_bool scroll_in, t_co co)
 {
 	static int	i = 0;
@@ -29,13 +27,15 @@ void	zoom(t_data *data, t_bool scroll_in, t_co co)
 		i = 0;
 		data->f->max_iter += 7 * (-1 * (scale > 1) + (scale < 1));
 	}
-	data->f->plan.start.x = cross_multi(co.x, data->f->plan.start.x, scale);
-	data->f->plan.start.y = cross_multi(co.y, data->f->plan.start.y, scale);
-	data->f->plan.end.x = cross_multi(co.x, data->f->plan.end.x, scale);
-	data->f->plan.end.y = cross_multi(co.y, data->f->plan.end.y, scale);
+	data->f->plan.start.x = cross_multi_plan(co.x, data->f->plan.start.x, \
+scale);
+	data->f->plan.start.y = cross_multi_plan(co.y, data->f->plan.start.y, \
+scale);
+	data->f->plan.end.x = cross_multi_plan(co.x, data->f->plan.end.x, scale);
+	data->f->plan.end.y = cross_multi_plan(co.y, data->f->plan.end.y, scale);
 }
 
-static double	cross_multi(double start, double end, double scale)
+double	cross_multi_plan(double start, double end, double scale)
 {
 	return (start + ((end - start) * scale));
 }

@@ -95,3 +95,11 @@ start, data->hover[i].max_iter.end, data->hover[i].i);
 	}
 	set_menu(data);
 }
+
+void	zoom_hover(t_fractal *f, double scale)
+{
+	f->plan.start.x = cross_multi_plan(0, f->plan_default.start.x, scale);
+	f->plan.start.y = cross_multi_plan(0, f->plan_default.start.y, scale);
+	f->plan.end.x = cross_multi_plan(0, f->plan_default.end.x, scale);
+	f->plan.end.y = cross_multi_plan(0, f->plan_default.end.y, scale);
+}

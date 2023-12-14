@@ -77,7 +77,10 @@ t->data->f->plan.start.x + i->x * r.x, t->data->f->plan.end.y - i->y * r.y});
 	{
 		c.x = i->x + (k >= 2);
 		c.y = i->y + (k % 2 == 1);
-		mlx_put_pixel_img(&t->data->img, c, col);
+		if (t->data->slide.render_img)
+			mlx_put_pixel_img(&t->data->slide.img, c, col);
+		else
+			mlx_put_pixel_img(&t->data->img, c, col);
 		if (!(t->data->edit || t->data->zoom_size))
 			return ;
 		k++;

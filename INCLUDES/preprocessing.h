@@ -41,7 +41,7 @@
 // DEFINE -------------------------------------------------
 # define MAX_ITER			50
 # define MAX_ITER_HOVER		35
-# define ZOOM_HOVER			0.87
+# define ZOOM_HOVER			0.90
 # define ZOOM_MENU			1
 # define N_FRAC				12
 # define FPS				25

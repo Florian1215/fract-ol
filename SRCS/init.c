@@ -25,12 +25,14 @@ void	init_mlx(t_data *data)
 	data->in_menu = TRUE;
 	data->menu.animation = FALSE;
 	data->menu.is_toggle = FALSE;
+	data->slide.render_img = FALSE;
 	cancel_animation(data);
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIN, WIN, \
 "Fract-ol");
 	init_img(&data->slide.img, data->mlx_ptr);
 	init_img(&data->img, data->mlx_ptr);
 	pthread_mutex_init(&data->mutex_line, NULL);
+	pthread_mutex_init(&data->render, NULL);
 	init_colors(data);
 	init_hovers(data);
 }

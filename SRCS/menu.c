@@ -77,21 +77,22 @@ static void	render_fractals(t_data *data, t_thread_preview *t)
 //	}
 //}
 
+void	zoom_hover(t_fractal *f, double scale);
+
 static void	fractal_preview(t_thread_preview *t)
 {
 	t_co	i;
 	double	col;
 	t_co	r;
-	double	hover;
+	t_img	*img;
 
-	hover = 1;
+	if (t->data->slide.render_img)
+		img = &t->data->slide.img;
+	else
+		img = &t->data->img;
 	if (t->data->hover[t->pos].is_active)
-	{
-		hover = t->data->hover[t->pos].zoom.value * 1;
-		printf("hover %f\n", hover);
-	}
+		zoom_hover(t->frac, t->data->hover[t->pos].zoom.value);
 	r = get_r(t->frac);
-	//
 	i.x = 0;
 	while (i.x < WIN)
 	{
@@ -99,8 +100,8 @@ static void	fractal_preview(t_thread_preview *t)
 		while (i.y < WIN)
 		{
 			col = t->frac->sequence(t->data, t->frac, (t_co){\
-t->frac->plan.start.x + i.x * r.x * hover, t->frac->plan.end.y - i.y * r.y * hover});
-			mlx_put_pixel_img(&t->data->img, (t_co){i.x / 2 + \
+t->frac->plan.start.x + i.x * r.x, t->frac->plan.end.y - i.y * r.y});
+			mlx_put_pixel_img(img, (t_co){i.x / 2 + \
 t->frac->menu.start.x, i.y / 2 + t->frac->menu.start.y}, col);
 			i.y += 2;
 		}

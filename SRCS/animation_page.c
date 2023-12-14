@@ -26,7 +26,7 @@ void	slide_page(t_data *data, int side)
 		else
 		{
 			data->slide.start = data->slide.value + WIN; // TODO fix pb image
-			printf("PB %d\n", data->slide.start);
+//			printf("PB %d\n", data->slide.start);
 		}
 	}
 	else
@@ -35,9 +35,15 @@ void	slide_page(t_data *data, int side)
 		if (side == LEFT)
 			data->slide.start *= -1;
 	}
-	dup_img(&data->img, &data->slide.img);
-	data->slide.side = side;
 	data->slide.animation = TRUE;
+	data->slide.render_img = TRUE;
+	if (data->in_menu)
+		set_menu(data);
+	else
+		render_fractal(data);
+	data->slide.render_img = FALSE;
+//	dup_img(&data->img, &data->slide.img);
+	data->slide.side = side;
 	init_slide_page(data, side);
 }
 
