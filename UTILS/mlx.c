@@ -35,25 +35,3 @@ int	close_mlx(t_data *data)
 	free(data->mlx_ptr);
 	exit(SUCCESS);
 }
-
-void	dup_img(t_img *from, t_img *to)
-{
-	int	x;
-	int	y;
-	int	c;
-
-	x = 0;
-	while (x < WIN)
-	{
-		y = 0;
-		while (y < WIN)
-		{
-			c = *(int *)(from->addr + x * from->bit_ratio + y * \
-from->line_length);
-			*(int *)(to->addr + x * to->bit_ratio + y * \
-to->line_length) = c;
-			y++;
-		}
-		x++;
-	}
-}

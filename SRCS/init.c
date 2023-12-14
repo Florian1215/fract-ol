@@ -25,6 +25,7 @@ void	init_mlx(t_data *data)
 	data->in_menu = TRUE;
 	data->menu.animation = FALSE;
 	data->menu.is_toggle = FALSE;
+	data->menu.save_img = FALSE;
 	data->slide.render_img = FALSE;
 	cancel_animation(data);
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIN, WIN, \

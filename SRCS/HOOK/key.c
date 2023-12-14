@@ -17,10 +17,11 @@ static void	set_hook_preset(t_data *data, int k);
 
 int	key_event_press(int k, t_data *data)
 {
+	pthread_mutex_lock(&data->render);
 	if ((k == LEFT || k == RIGHT) && !data->menu.animation)
 		slide_page(data, k);
 	if (data->slide.animation)
-		return (ERROR);
+		return (pthread_mutex_unlock(&data->render), SUCCESS);
 	if (k == D)
 		toggle_appearance(data);
 	else if (k == C)
@@ -31,23 +32,26 @@ int	key_event_press(int k, t_data *data)
 		edit_iter(data, 10);
 	else if (k == MINUS)
 		edit_iter(data, -10);
+	pthread_mutex_unlock(&data->render);
 	return (SUCCESS);
 }
 
 int	key_event(int k, t_data *data)
 {
+	pthread_mutex_lock(&data->render);
 	if (data->slide.animation)
-		return (ERROR);
+		;
 	else if (k == TAB)
 		toggle_menu_animation(data);
-	if (k == ESQ)
+	else if (k == ESQ)
 		close_mlx(data);
-	if (data->in_menu && !data->menu.animation)
+	else if (data->in_menu && !data->menu.animation)
 		launch_fractals(data, k);
 	else if (k == Q)
 		start_reset_animation(data);
 	else
 		set_hook_preset(data, k);
+	pthread_mutex_unlock(&data->render);
 	return (SUCCESS);
 }
 

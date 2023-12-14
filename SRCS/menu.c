@@ -15,8 +15,7 @@
 void		init_hovers(t_data *data);
 static void	render_fractals(t_data *data, t_thread_preview *t);
 static void	fractal_preview(t_thread_preview *t);
-//static t_co	get_pos_fractal_preview(t_data *data, t_fractal *frac, t_co i, \
-//t_pos pos);
+void		zoom_hover(t_fractal *f, double scale);
 //static int	get_pos_name_fractal(int pos, int offset);
 
 void	set_menu(t_data *data)
@@ -57,28 +56,6 @@ static void	render_fractals(t_data *data, t_thread_preview *t)
 	}
 }
 
-//static void	fractal_preview(t_thread_preview *t)
-//{
-//	t_co	i;
-//	double	col;
-//
-//	i.x = t->frac->menu.start.x;
-//	while (i.x < t->frac->menu.end.x)
-//	{
-//		i.y = t->frac->menu.start.y;
-//		while (i.y < t->frac->menu.end.y)
-//		{
-//			col = t->frac->sequence(t->data, t->frac, get_pos_fractal_preview(
-//t->data, t->frac, i, t->pos));
-//			mlx_put_pixel_img(&t->data->img, i, col);
-//			i.y++;
-//		}
-//		i.x++;
-//	}
-//}
-
-void	zoom_hover(t_fractal *f, double scale);
-
 static void	fractal_preview(t_thread_preview *t)
 {
 	t_co	i;
@@ -86,7 +63,7 @@ static void	fractal_preview(t_thread_preview *t)
 	t_co	r;
 	t_img	*img;
 
-	if (t->data->slide.render_img)
+	if (t->data->slide.render_img || t->data->menu.save_img)
 		img = &t->data->slide.img;
 	else
 		img = &t->data->img;

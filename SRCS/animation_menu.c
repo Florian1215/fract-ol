@@ -14,23 +14,33 @@
 
 static void	set_menu_animation_from_menu(t_data *data);
 static void	set_menu_animation_from_fractal(t_data *data);
+void		set_page_value(t_data *data);
 void		menu_animation(t_data *data);
 static void	put_resize_image(t_data *data, int size);
 
-// TODO fix when toggle quickly
 void	toggle_menu_animation(t_data *data)
 {
+	t_bool	menu;
+
 	if (data->in_menu)
+	{
 		set_menu_animation_from_menu(data);
+		menu = FALSE;
+	}
 	else
 	{
 		data->menu.is_toggle = TRUE;
 		if (!data->menu.animation && start_reset_animation(data))
 			return ;
 		set_menu_animation_from_fractal(data);
+		menu = TRUE;
 	}
 	data->menu.pos = data->f->set % 4;
-	dup_img(&data->img, &data->slide.img);
+	data->menu.save_img = TRUE;
+	set_page_value(data);
+	set_page(data, data->page);
+	data->menu.save_img = FALSE;
+	data->in_menu = menu;
 	data->menu.step = (t_co){1, 1};
 	data->menu.v.x = WIN * (data->menu.pos % 2);
 	data->menu.v.y = WIN * (data->menu.pos >= 2);
@@ -43,7 +53,6 @@ void	toggle_menu_animation(t_data *data)
 
 static void	set_menu_animation_from_menu(t_data *data)
 {
-	data->in_menu = FALSE;
 	set_color(data, data->f->color);
 	data->menu.i = 0;
 	if (data->menu.animation)
@@ -52,17 +61,12 @@ static void	set_menu_animation_from_menu(t_data *data)
 		data->menu.start = WIN;
 	data->menu.animation = TRUE;
 	data->menu.end = WIN * 2;
+	data->in_menu = FALSE;
 }
 
 static void	set_menu_animation_from_fractal(t_data *data)
 {
 	data->offset_color = data->color - data->f->color;
-	if (data->f->set < BUFFALO)
-		data->page = 0;
-	else if (data->f->set < PERPENDICULAR_CELTIC)
-		data->page = 1;
-	else
-		data->page = 2;
 	if (data->menu.animation)
 		data->menu.start = data->menu.size;
 	else
@@ -70,7 +74,6 @@ static void	set_menu_animation_from_fractal(t_data *data)
 	data->menu.i = 0;
 	data->menu.end = WIN;
 	data->menu.animation = TRUE;
-	set_page(data, data->page);
 }
 
 void	menu_animation(t_data *data)

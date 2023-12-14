@@ -63,7 +63,6 @@ void		cancel_animation(t_data *data);
 double		get_value(double a, double b, int i);
 int			close_mlx(t_data *data);
 void		mlx_put_pixel_img(t_img *img, t_co co, int color);
-void		dup_img(t_img *from, t_img *to);
 t_time		get_timestamp(void);
 void		sleep_until(t_time until);
 
@@ -87,6 +86,7 @@ struct	s_menu_animation
 	int		size;
 	t_pos	pos;
 	t_bool	animation;
+	t_bool	save_img;
 	t_bool	is_toggle;
 	t_co	v;
 	t_co	step;

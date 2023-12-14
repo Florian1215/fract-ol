@@ -14,6 +14,7 @@
 
 static void	init_slide_page(t_data *data, int side);
 
+// TODO FIX when slide and TAB
 void	slide_page(t_data *data, int side)
 {
 	if (data->slide.animation)
@@ -25,8 +26,8 @@ void	slide_page(t_data *data, int side)
 			data->slide.start = data->slide.value - WIN;
 		else
 		{
-			data->slide.start = data->slide.value + WIN; // TODO fix pb image
-//			printf("PB %d\n", data->slide.start);
+			data->slide.start = data->slide.value + WIN;
+			// TODO fix pb image
 		}
 	}
 	else

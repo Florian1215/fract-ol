@@ -29,3 +29,13 @@ void	set_page(t_data *data, int page)
 	data->page = page;
 	set_menu(data);
 }
+
+void	set_page_value(t_data *data)
+{
+	if (data->f->set < BUFFALO)
+		data->page = 0;
+	else if (data->f->set < PERPENDICULAR_CELTIC)
+		data->page = 1;
+	else
+		data->page = 2;
+}

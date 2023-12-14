@@ -42,6 +42,7 @@ static int	hook_loop(t_data *data)
 	t_bool		render;
 
 	start_render = get_timestamp();
+	pthread_mutex_lock(&data->render);
 	if (data->slide.animation)
 		render_slide(data);
 	else if (data->menu.animation)
@@ -63,6 +64,7 @@ data->reset || data->update);
 		if (data->zoom_size)
 			data->zoom_size--;
 	}
+	pthread_mutex_unlock(&data->render);
 	sleep_until(start_render + FPS);
 	return (SUCCESS);
 }

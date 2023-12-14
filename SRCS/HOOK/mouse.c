@@ -20,15 +20,17 @@ void			zoom(t_data *data, t_bool scroll_in, t_co co);
 
 int	mouse_event_press(int button, int x, int y, t_data *data)
 {
+	pthread_mutex_lock(&data->render);
 	if (data->slide.animation || data->reset)
-		return (ERROR);
-	if (data->in_menu && button == LEFT_CLICK)
+		;
+	else if (data->in_menu && button == LEFT_CLICK)
 	{
 		data->f = data->fractals + data->menus[select_fractal((t_co){x, y})];
 		toggle_menu_animation(data);
 	}
 	else
 		mouse_event_fractal(data, button, (t_co){x, y});
+	pthread_mutex_unlock(&data->render);
 	return (SUCCESS);
 }
 
@@ -36,6 +38,7 @@ int	mouse_event_release(int button, int x, int y, t_data *data)
 {
 	(void)x;
 	(void)y;
+	pthread_mutex_lock(&data->render);
 	if (!data->in_menu)
 	{
 		if (button == LEFT_CLICK)
@@ -51,6 +54,7 @@ int	mouse_event_release(int button, int x, int y, t_data *data)
 			data->update = TRUE;
 		}
 	}
+	pthread_mutex_unlock(&data->render);
 	return (SUCCESS);
 }
 
@@ -58,9 +62,10 @@ int	mouse_event_motion(int x, int y, t_data *data)
 {
 	t_pos	current;
 
+	pthread_mutex_lock(&data->render);
 	if (data->slide.animation || data->reset)
-		return (ERROR);
-	if (data->in_menu)
+		;
+	else if (data->in_menu)
 	{
 		current = select_fractal((t_co){x, y});
 		if (current != get_last_hover(data->hover))
@@ -71,6 +76,7 @@ int	mouse_event_motion(int x, int y, t_data *data)
 	else if (data->edit_c)
 		data->f->c = (t_co){(double)(x - HWIN) / QWIN, (double)(y - HWIN) / \
 QWIN};
+	pthread_mutex_unlock(&data->render);
 	return (SUCCESS);
 }
 
