@@ -22,7 +22,7 @@ int	main(void)
 
 	init_mlx(&data);
 	init_fractal(&data);
-	set_page(&data, 0);
+	set_page(&data, 0, TRUE);
 	set_hook(&data);
 	mlx_loop(data.mlx_ptr);
 }

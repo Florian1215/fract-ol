@@ -12,7 +12,7 @@
 
 #include "fractol.h"
 
-void	set_page(t_data *data, int page)
+void	set_page(t_data *data, int page, t_bool update)
 {
 	static t_fractals	menu[3][4] = {\
 				{MANDELBROT, JULIA, CELTIC, BURNING_SHIP}, \
@@ -22,6 +22,11 @@ void	set_page(t_data *data, int page)
 	if (page < 0)
 		page = 2;
 	page %= 3;
+	if (update)
+	{
+		data->f = data->fractals + (page * 4);
+		set_page_value(data);
+	}
 	data->menus[POS_1] = menu[page][POS_1];
 	data->menus[POS_2] = menu[page][POS_2];
 	data->menus[POS_3] = menu[page][POS_3];

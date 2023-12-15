@@ -14,7 +14,6 @@
 
 static void	set_menu_animation_from_menu(t_data *data);
 static void	set_menu_animation_from_fractal(t_data *data);
-void		set_page_value(t_data *data);
 void		menu_animation(t_data *data);
 static void	put_resize_image(t_data *data, int size);
 
@@ -37,8 +36,7 @@ void	toggle_menu_animation(t_data *data)
 	}
 	data->menu.pos = data->f->set % 4;
 	data->menu.save_img = TRUE;
-	set_page_value(data);
-	set_page(data, data->page);
+	set_page(data, data->page, FALSE);
 	data->menu.save_img = FALSE;
 	data->in_menu = menu;
 	data->menu.step = (t_co){1, 1};
@@ -61,7 +59,6 @@ static void	set_menu_animation_from_menu(t_data *data)
 		data->menu.start = WIN;
 	data->menu.animation = TRUE;
 	data->menu.end = WIN * 2;
-	data->in_menu = FALSE;
 }
 
 static void	set_menu_animation_from_fractal(t_data *data)

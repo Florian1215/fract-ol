@@ -114,7 +114,8 @@ void		set_menu(t_data *data);
 void		set_names_fractal(t_data *data, void *img, int x_offset);
 void		toggle_menu_animation(t_data *data);
 int			mouse_event_motion(int x, int y, t_data *data);
-void		set_page(t_data *data, int page);
+void		set_page(t_data *data, int page, t_bool update);
+void		set_page_value(t_data *data);
 void		slide_page(t_data *data, int side);
 
 // FRACTAL ----------------------------------------------------------

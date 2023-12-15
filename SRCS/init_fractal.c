@@ -44,7 +44,6 @@ init_perpendicular_celtic, init_heart, init_mandelbar, init_celtic_mandelbrot};
 		data->fractals[i].c = data->fractals[i].preset(PRESET_0);
 		i++;
 	}
-	data->f = data->fractals;
 }
 
 

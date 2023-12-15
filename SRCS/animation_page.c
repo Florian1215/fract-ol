@@ -55,9 +55,9 @@ static void	init_slide_page(t_data *data, int side)
 	if (data->in_menu)
 	{
 		if (side == LEFT)
-			set_page(data, data->page - 1);
+			set_page(data, data->page - 1, TRUE);
 		else
-			set_page(data, data->page + 1);
+			set_page(data, data->page + 1, TRUE);
 	}
 	else
 	{
@@ -68,6 +68,7 @@ static void	init_slide_page(t_data *data, int side)
 		else
 			set = (data->f->set + 1) % 12;
 		data->f = data->fractals + set;
+		set_page_value(data);
 		render_fractal(data);
 	}
 }
