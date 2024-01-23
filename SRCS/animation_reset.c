@@ -38,7 +38,6 @@ void	reset_animation(t_data *data)
 	{
 		data->f->animation_plan = data->f->plan;
 		start_max_iter = data->f->max_iter;
-		data->f->max_iter = MAX_ITER;
 	}
 	else if (i == FRAME_ANIMATION)
 	{
@@ -64,4 +63,5 @@ data->f->plan_default.end.x, i);
 	data->f->plan.end.y = get_value(data->f->animation_plan.end.y, \
 data->f->plan_default.end.y, i);
 	data->f->max_iter = get_value(MAX_ITER, start_max_iter, i);
+//	printf(")
 }

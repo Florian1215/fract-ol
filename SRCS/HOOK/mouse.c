@@ -28,7 +28,7 @@ int	mouse_event_press(int button, int x, int y, t_data *data)
 		data->f = data->fractals + data->menus[select_fractal((t_co){x, y})];
 		toggle_menu_animation(data);
 	}
-	else
+	else if (!data->in_menu)
 		mouse_event_fractal(data, button, (t_co){x, y});
 	pthread_mutex_unlock(&data->render);
 	return (SUCCESS);
