@@ -14,11 +14,14 @@
 
 void	init_hovers(t_data *data)
 {
-	t_pos	i;
+	t_pos		i;
+	t_fractals	f;
 
 	i = POS_1;
 	while (i < 4)
 	{
+		f = i + data->page * 4;
+		data->fractals[f].plan_start_hover = data->fractals[f].plan;
 		data->hover[i].is_active = FALSE;
 		data->hover[i].animation = FALSE;
 		data->hover[i].hover = FALSE;

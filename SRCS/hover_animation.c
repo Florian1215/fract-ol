@@ -69,6 +69,7 @@ static void	init_new_hover(t_hover *hover, t_pos new)
 	hover[new].hover = TRUE;
 	hover[new].animation = TRUE;
 	hover[new].is_active = TRUE;
+	hover[new].is_active = TRUE;
 }
 
 void	hover_animation(t_data *data)
@@ -98,8 +99,8 @@ start, data->hover[i].max_iter.end, data->hover[i].i);
 
 void	zoom_hover(t_fractal *f, double scale)
 {
-	f->plan.start.x = cross_multi_plan(0, f->plan_default.start.x, scale);
-	f->plan.start.y = cross_multi_plan(0, f->plan_default.start.y, scale);
-	f->plan.end.x = cross_multi_plan(0, f->plan_default.end.x, scale);
-	f->plan.end.y = cross_multi_plan(0, f->plan_default.end.y, scale);
+	f->plan.start.x = cross_multi_plan(0, f->plan_start_hover.start.x, scale);
+	f->plan.start.y = cross_multi_plan(0, f->plan_start_hover.start.y, scale);
+	f->plan.end.x = cross_multi_plan(0, f->plan_start_hover.end.x, scale);
+	f->plan.end.y = cross_multi_plan(0, f->plan_start_hover.end.y, scale);
 }

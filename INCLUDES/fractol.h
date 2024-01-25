@@ -87,7 +87,6 @@ struct	s_menu_animation
 	t_pos	pos;
 	t_bool	animation;
 	t_bool	save_img;
-	t_bool	is_toggle;
 	t_co	v;
 	t_co	step;
 };
@@ -157,6 +156,7 @@ struct s_fractal
 	t_delta			animation_c;
 	t_delta			plan;
 	t_delta			plan_default;
+	t_delta			plan_start_hover;
 	t_delta			animation_plan;
 	t_delta			menu;
 	char			*name;

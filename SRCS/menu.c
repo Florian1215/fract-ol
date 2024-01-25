@@ -86,6 +86,7 @@ t->frac->menu.start.x, i.y / 2 + t->frac->menu.start.y}, col);
 	}
 }
 
+// TODO set name fractal
 void	set_names_fractal(t_data *data, void *img, int x_offset)
 {
 //	t_fractals	f;

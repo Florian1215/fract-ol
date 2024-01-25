@@ -43,8 +43,6 @@ void	reset_animation(t_data *data)
 	{
 		data->reset = FALSE;
 		data->f->plan = data->f->plan_default;
-		if (data->menu.is_toggle)
-			toggle_menu_animation(data);
 		i = 0;
 		return ;
 	}

@@ -26,6 +26,7 @@ void		init_perpendicular_celtic(t_fractal *f);
 void		init_heart(t_fractal *f);
 void		init_mandelbar(t_fractal *f);
 void		init_celtic_mandelbrot(t_fractal *f);
+void		init_hovers(t_data *data);
 
 void	init_fractal(t_data *data)
 {
@@ -44,6 +45,7 @@ init_perpendicular_celtic, init_heart, init_mandelbar, init_celtic_mandelbrot};
 		data->fractals[i].c = data->fractals[i].preset(PRESET_0);
 		i++;
 	}
+	init_hovers(data);
 }
 
 

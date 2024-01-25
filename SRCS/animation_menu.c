@@ -22,18 +22,10 @@ void	toggle_menu_animation(t_data *data)
 	t_bool	menu;
 
 	if (data->in_menu)
-	{
 		set_menu_animation_from_menu(data);
-		menu = FALSE;
-	}
 	else
-	{
-		data->menu.is_toggle = TRUE;
-		if (!data->menu.animation && start_reset_animation(data))
-			return ;
 		set_menu_animation_from_fractal(data);
-		menu = TRUE;
-	}
+	menu = !data->in_menu;
 	data->menu.pos = data->f->set % 4;
 	data->menu.save_img = TRUE;
 	set_page(data, data->page, FALSE);
@@ -78,14 +70,8 @@ void	menu_animation(t_data *data)
 	if (data->menu.i == FRAME_ANIMATION)
 	{
 		data->menu.animation = FALSE;
-		data->menu.is_toggle = FALSE;
 		if (data->in_menu)
 			set_menu(data);
-		else
-		{
-			data->update = TRUE;
-			start_reset_animation(data);
-		}
 		return ;
 	}
 	data->menu.size = get_value(data->menu.start, data->menu.end, \

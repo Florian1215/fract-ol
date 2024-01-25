@@ -12,7 +12,6 @@
 
 #include "fractol.h"
 
-void		init_hovers(t_data *data);
 static void	init_img(t_img *img, void *mlx_ptr);
 
 void	init_mlx(t_data *data)
@@ -24,7 +23,6 @@ void	init_mlx(t_data *data)
 	data->appearance = LIGHT;
 	data->in_menu = TRUE;
 	data->menu.animation = FALSE;
-	data->menu.is_toggle = FALSE;
 	data->menu.save_img = FALSE;
 	data->slide.render_img = FALSE;
 	cancel_animation(data);
@@ -35,7 +33,6 @@ void	init_mlx(t_data *data)
 	pthread_mutex_init(&data->mutex_line, NULL);
 	pthread_mutex_init(&data->render, NULL);
 	init_colors(data);
-	init_hovers(data);
 }
 
 void	cancel_animation(t_data *data)
