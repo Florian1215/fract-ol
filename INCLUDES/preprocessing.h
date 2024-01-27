@@ -39,15 +39,28 @@
 # endif
 
 // DEFINE -------------------------------------------------
-# define MAX_ITER			50
-# define MAX_ITER_HOVER		35
-# define ZOOM_HOVER			0.90
-# define ZOOM_MENU			1
-# define N_FRAC				12
-# define FPS				25
-# define FRAME_ANIMATION	29
-# define WIN				1000
-# define HWIN				500
-# define QWIN				250
+# define MAX_ITER					50
+# define MAX_ITER_HOVER				35
+# define ZOOM_HOVER					0.90
+# define ZOOM_MENU					1
+# define N_FRAC						12
+# define FPS						25
+# define FRAME_ANIMATION			29
+# define WIN						1000
+# define HWIN						500
+# define QWIN						250
+
+# define PATH_MANDELBROT			"./ASSETS/01_mandelbrot.xpm"
+# define PATH_JULIA					"./ASSETS/02_julia.xpm"
+# define PATH_CELTIC				"./ASSETS/03_celtic.xpm"
+# define PATH_BURNING_SHIP			"./ASSETS/04_burning_ship.xpm"
+# define PATH_BUFFALO				"./ASSETS/05_buffalo.xpm"
+# define PATH_BURNING_JULIA			"./ASSETS/06_burning_julia.xpm"
+# define PATH_JULIA3				"./ASSETS/07_julia3.xpm"
+# define PATH_CELTIC_MANDELBAR		"./ASSETS/08_celtic_mandelbar.xpm"
+# define PATH_PERPENDICULAR_CELTIC	"./ASSETS/09_perpendicular_celtic.xpm"
+# define PATH_HEART					"./ASSETS/10_heart.xpm"
+# define PATH_MANDELBAR				"./ASSETS/11_mandelbar.xpm"
+# define PATH_CELTIC_MANDELBROT		"./ASSETS/12_celtic_mandelbrot.xpm"
 
 #endif

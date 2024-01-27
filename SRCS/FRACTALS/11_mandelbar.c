@@ -22,7 +22,6 @@ void	init_mandelbar(t_fractal *f)
 	f->preset = preset_mandelbar;
 	f->max_preset = PRESET_7;
 	f->color = BLUE;
-	f->name = "Mandelbar";
 	f->offset_name = 30;
 }
 

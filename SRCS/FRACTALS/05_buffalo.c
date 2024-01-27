@@ -24,7 +24,6 @@ void	init_buffalo(t_fractal *f)
 	f->preset = preset_buffalo;
 	f->max_preset = PRESET_9;
 	f->color = BLUE_RED;
-	f->name = "Buffalo";
 	f->offset_name = 25;
 }
 

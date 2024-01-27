@@ -22,7 +22,6 @@ void	init_julia(t_fractal *f)
 	f->preset = preset_julia;
 	f->max_preset = PRESET_6;
 	f->color = PURPLE;
-	f->name = "Julia";
 	f->offset_name = 19;
 }
 

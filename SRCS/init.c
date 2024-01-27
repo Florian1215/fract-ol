@@ -12,7 +12,7 @@
 
 #include "fractol.h"
 
-static void	init_img(t_img *img, void *mlx_ptr);
+void	init_img(t_img *img, char *path, void *mlx_ptr);
 
 void	init_mlx(t_data *data)
 {
@@ -28,8 +28,8 @@ void	init_mlx(t_data *data)
 	cancel_animation(data);
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIN, WIN, \
 "Fract-ol");
-	init_img(&data->slide.img, data->mlx_ptr);
-	init_img(&data->img, data->mlx_ptr);
+	init_img(&data->slide.img, NULL, data->mlx_ptr);
+	init_img(&data->img, NULL, data->mlx_ptr);
 	pthread_mutex_init(&data->mutex_line, NULL);
 	pthread_mutex_init(&data->render, NULL);
 	init_colors(data);
@@ -47,9 +47,15 @@ void	cancel_animation(t_data *data)
 	data->c_animate = FALSE;
 }
 
-static void	init_img(t_img *img, void *mlx_ptr)
+void	init_img(t_img *img, char *path, void *mlx_ptr)
 {
-	img->img = mlx_new_image(mlx_ptr, WIN, WIN);
+	if (path)
+		img->img = mlx_xpm_file_to_image(mlx_ptr, path, \
+	&img->width, &img->height);
+	else
+		img->img = mlx_new_image(mlx_ptr, WIN, WIN);
+	if (!img->img)
+		return ;
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, \
 &img->line_length, &img->endian);
 	img->bit_ratio = img->bits_per_pixel / 8;

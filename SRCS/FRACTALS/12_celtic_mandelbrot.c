@@ -22,7 +22,6 @@ void	init_celtic_mandelbrot(t_fractal *f)
 	f->preset = preset_celtic_mandelbrot;
 	f->max_preset = PRESET_5;
 	f->color = YELLOW;
-	f->name = "Celtic Mandelbrot";
 	f->offset_name = 60;
 }
 

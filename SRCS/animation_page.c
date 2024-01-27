@@ -43,7 +43,6 @@ void	slide_page(t_data *data, int side)
 	else
 		render_fractal(data);
 	data->slide.render_img = FALSE;
-//	dup_img(&data->img, &data->slide.img);
 	data->slide.side = side;
 	init_slide_page(data, side);
 }
@@ -77,41 +76,20 @@ void	render_slide(t_data *data)
 {
 	int	x_from;
 
-//	if (data->slide.i == 0)
-//	{
-//		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
-//		data->slide.i++;
-//		data->render = FALSE;
-//		return;
-//	}
-//	if (data->slide.i == 1)
-//	{
-//		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->slide.img.img, 0, 0);
-//		data->slide.i++;
-//		data->render = FALSE;
-//		return;
-//	}
 	if (data->slide.i == FRAME_ANIMATION)
 	{
 		cancel_animation(data);
 		data->slide.i = 0;
 		return ;
 	}
-	data->slide.value = get_value(data->slide.start, 0, data->slide.i++) * WIN / \
-1000;
+	data->slide.value = get_value(data->slide.start, 0, data->slide.i++) * \
+WIN / 1000;
 	if (data->slide.side == LEFT)
 		x_from = data->slide.value + WIN;
 	else
-	{
-//		printf("%d | %d - %d\n", data->slide.pos, data->slide.start, 0);
 		x_from = data->slide.value - WIN;
-	}
-	if (data->in_menu)
-		set_names_fractal(data, data->img.img, data->slide.value);
-	else
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, \
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, \
 data->slide.value, 0);
-//	printf("put 2 at %d\n", x_from);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
 data->slide.img.img, x_from, 0);
 }

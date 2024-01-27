@@ -26,6 +26,7 @@ void		init_perpendicular_celtic(t_fractal *f);
 void		init_heart(t_fractal *f);
 void		init_mandelbar(t_fractal *f);
 void		init_celtic_mandelbrot(t_fractal *f);
+void		init_img(t_img *img, char *path, void *mlx_ptr);
 void		init_hovers(t_data *data);
 
 void	init_fractal(t_data *data)
@@ -34,6 +35,10 @@ void	init_fractal(t_data *data)
 init_mandelbrot, init_julia, init_celtic, init_burning_shipe, init_buffalo, \
 init_burning_julia, init_julia3, init_celtic_mandelbar, \
 init_perpendicular_celtic, init_heart, init_mandelbar, init_celtic_mandelbrot};
+	const char	*paths[N_FRAC] = {PATH_MANDELBROT, PATH_JULIA, PATH_CELTIC, \
+PATH_BURNING_SHIP, PATH_BUFFALO, PATH_BURNING_JULIA, PATH_JULIA3, \
+PATH_CELTIC_MANDELBAR, PATH_PERPENDICULAR_CELTIC, PATH_HEART, PATH_MANDELBAR, \
+PATH_CELTIC_MANDELBROT};
 	int			i;
 
 	i = 0;
@@ -41,6 +46,7 @@ init_perpendicular_celtic, init_heart, init_mandelbar, init_celtic_mandelbrot};
 	{
 		init_fractal_default(data->fractals + i, i % 4);
 		init_fractals[i](data->fractals + i);
+		init_img(&data->fractals[i].name, (char *)paths[i], data->mlx_ptr);
 		data->fractals[i].plan_default = data->fractals[i].plan;
 		data->fractals[i].c = data->fractals[i].preset(PRESET_0);
 		i++;

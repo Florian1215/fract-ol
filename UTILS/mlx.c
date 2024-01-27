@@ -25,6 +25,30 @@ void	mlx_put_pixel_img(t_img *img, t_co co, int color)
 img->bits_per_pixel / 8))) = color;
 }
 
+void	draw_alpha(t_img *img, t_img *alpha, t_co pos, double ratio)
+{
+	t_co	size;
+	t_co	texture;
+	int		c;
+
+	size = (t_co){alpha->width * ratio, alpha->height * ratio};
+	texture.y = 0;
+	while (texture.y < size.y)
+	{
+		texture.x = 0;
+		while (texture.x < size.x)
+		{
+			c = *(int *)(alpha->addr + (int)(texture.x / ratio) *alpha-> \
+				bit_ratio + (int)(texture.y / ratio) *alpha->line_length);
+			if (!(c & 0xFF000000))
+				mlx_put_pixel_img(img, (t_co){pos.x + texture.x, pos.y + \
+texture.y}, c);
+			texture.x++;
+		}
+		texture.y++;
+	}
+}
+
 int	close_mlx(t_data *data)
 {
 	mlx_destroy_image(data->mlx_ptr, data->slide.img.img);

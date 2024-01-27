@@ -22,7 +22,6 @@ void	init_heart(t_fractal *f)
 	f->preset = preset_heart;
 	f->max_preset = PRESET_5;
 	f->color = NIGHT_BLUE;
-	f->name = "Heart";
 	f->offset_name = 18;
 }
 

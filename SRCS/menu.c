@@ -16,7 +16,8 @@ void		init_hovers(t_data *data);
 static void	render_fractals(t_data *data, t_thread_preview *t);
 static void	fractal_preview(t_thread_preview *t);
 void		zoom_hover(t_fractal *f, double scale);
-//static int	get_pos_name_fractal(int pos, int offset);
+void		draw_alpha(t_img *img, t_img *alpha, t_co pos, double ratio);
+
 
 void	set_menu(t_data *data)
 {
@@ -33,8 +34,7 @@ void	set_menu(t_data *data)
 	i = POS_1;
 	while (i < 4)
 		pthread_join(t[i++].thread, NULL);
-	if (!data->slide.animation)
-		set_names_fractal(data, data->img.img, 0);
+	set_names_fractal(data, data->img.img, 0);
 }
 
 static void	render_fractals(t_data *data, t_thread_preview *t)
@@ -89,24 +89,25 @@ t->frac->menu.start.x, i.y / 2 + t->frac->menu.start.y}, col);
 // TODO set name fractal
 void	set_names_fractal(t_data *data, void *img, int x_offset)
 {
-//	t_fractals	f;
-//	int			i;
+	t_img		*name;
+	int			i;
+	t_co		offset;
 
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img, x_offset, 0);
-//	printf("put at %d\n", x_offset);
-//	i = 0;
-//	while (i < 4)
-//	{
-//		f = i + data->page * 4;
-//		mlx_string_put(data->mlx_ptr, data->win_ptr, get_pos_name_fractal(i % 2 ? 3 : 1, data->fractals[f].offset_name) + x_offset, get_pos_name_fractal(i < 2 ? 1 : 3, -3), FG, data->fractals[f].name);
-//		mlx_string_put(data->mlx_ptr, data->win_ptr, get_pos_name_fractal(i % 2 ? 3 : 1, data->fractals[f].offset_name - 1) + x_offset, get_pos_name_fractal(i < 2 ? 1 : 3, -4), FG, data->fractals[f].name);
-//		mlx_string_put(data->mlx_ptr, data->win_ptr, get_pos_name_fractal(i % 2 ? 3 : 1, data->fractals[f].offset_name - 2) + x_offset, get_pos_name_fractal(i < 2 ? 1 : 3, -5), FG, data->fractals[f].name);
-//		mlx_string_put(data->mlx_ptr, data->win_ptr, get_pos_name_fractal(i % 2 ? 3 : 1, data->fractals[f].offset_name) + x_offset, get_pos_name_fractal(i < 2 ? 1 : 3, -3), WHITE, data->fractals[f].name);
-//		i++;
-//	}
+	i = 0;
+	while (i < 4)
+	{
+		printf("%d\n", i + data->page * 4);
+		name = &data->fractals[i + data->page * 4].name;
+		offset = (t_co){QWIN + x_offset, QWIN};
+		if (i % 2)
+			offset.x += HWIN;
+		offset.x -= name->width / 2;
+		if (i >= 2)
+			offset.y += HWIN;
+		offset.y -= name->height / 2;
+		draw_alpha(&data->img, name, offset, 1);
+		i++;
+	}
+	if (!data->slide.animation)
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img, x_offset, 0);
 }
-
-//static int	get_pos_name_fractal(int pos, int offset)
-//{
-//	return ((int)(WIN / 4) * pos - offset);
-//}

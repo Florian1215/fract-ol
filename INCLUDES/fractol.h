@@ -36,6 +36,8 @@ struct	s_img
 	int		line_length;
 	int		bit_ratio;
 	int		endian;
+	int		width;
+	int		height;
 };
 
 struct s_co
@@ -159,10 +161,10 @@ struct s_fractal
 	t_delta			plan_start_hover;
 	t_delta			animation_plan;
 	t_delta			menu;
-	char			*name;
 	int				offset_name;
 	int				max_iter;
 	t_preset		max_preset;
+	t_img			name;
 	t_co			(*preset)(t_preset);
 	int				(*sequence)(t_data *, t_fractal *, t_co);
 };
