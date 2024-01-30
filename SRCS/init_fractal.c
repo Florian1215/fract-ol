@@ -27,7 +27,6 @@ void		init_heart(t_fractal *f);
 void		init_mandelbar(t_fractal *f);
 void		init_celtic_mandelbrot(t_fractal *f);
 void		init_img(t_img *img, char *path, void *mlx_ptr);
-void		init_hovers(t_data *data);
 
 void	init_fractal(t_data *data)
 {
@@ -51,7 +50,6 @@ PATH_CELTIC_MANDELBROT};
 		data->fractals[i].c = data->fractals[i].preset(PRESET_0);
 		i++;
 	}
-	init_hovers(data);
 }
 
 

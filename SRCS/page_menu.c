@@ -43,4 +43,5 @@ void	set_page_value(t_data *data)
 		data->page = 1;
 	else
 		data->page = 2;
+	init_hovers(data);
 }

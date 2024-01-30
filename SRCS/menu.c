@@ -12,11 +12,12 @@
 
 #include "fractol.h"
 
-void		init_hovers(t_data *data);
 static void	render_fractals(t_data *data, t_thread_preview *t);
 static void	fractal_preview(t_thread_preview *t);
 void		zoom_hover(t_fractal *f, double scale);
-void		draw_alpha(t_img *img, t_img *alpha, t_co pos, double ratio);
+static void	set_names_fractal(t_data *data, void *img_ptr, int x_offset);
+static void	set_name_fractal(t_data *data, int x_offset, t_img *img, int i);
+void		draw_alpha(t_img *img, t_img *alpha, t_co pos, t_co color_ratio);
 
 
 void	set_menu(t_data *data)
@@ -86,28 +87,49 @@ t->frac->menu.start.x, i.y / 2 + t->frac->menu.start.y}, col);
 	}
 }
 
-// TODO set name fractal
-void	set_names_fractal(t_data *data, void *img, int x_offset)
+static void	set_names_fractal(t_data *data, void *img_ptr, int x_offset)
 {
-	t_img		*name;
-	int			i;
-	t_co		offset;
+	int		i;
+	t_img	*img;
 
+	if (data->slide.render_img || data->menu.save_img)
+		img = &data->slide.img;
+	else
+		img = &data->img;
 	i = 0;
 	while (i < 4)
 	{
-		printf("%d\n", i + data->page * 4);
-		name = &data->fractals[i + data->page * 4].name;
-		offset = (t_co){QWIN + x_offset, QWIN};
-		if (i % 2)
-			offset.x += HWIN;
-		offset.x -= name->width / 2;
-		if (i >= 2)
-			offset.y += HWIN;
-		offset.y -= name->height / 2;
-		draw_alpha(&data->img, name, offset, 1);
+		set_name_fractal(data, x_offset, img, i);
 		i++;
 	}
 	if (!data->slide.animation)
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img, x_offset, 0);
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img_ptr, \
+x_offset, 0);
+}
+
+static void	set_name_fractal(t_data *data, int x_offset, t_img *img, int i)
+{
+	const double	ratio = 0.75;
+	t_co			offset;
+	t_img			*name;
+	int				i_shadow;
+
+	name = &data->fractals[i + data->page * 4].name;
+	offset = (t_co){MAX_SHADOW + QWIN + x_offset, MAX_SHADOW + QWIN};
+	if (i % 2)
+		offset.x += HWIN;
+	offset.x -= name->width * ratio / 2;
+	if (i >= 2)
+		offset.y += HWIN;
+	offset.y -= name->height * ratio / 2;
+	i_shadow = 0;
+	while (i_shadow < MAX_SHADOW)
+	{
+		draw_alpha(img, name, offset, (t_co){FG, ratio});
+		offset = (t_co){offset.x - 1, offset.y - 1};
+		i_shadow++;
+	}
+	draw_alpha(img, name, (t_co){offset.x - 1, offset.y - 1}, (t_co){\
+FG, ratio});
+	draw_alpha(img, name, offset, (t_co){WHITE, ratio});
 }

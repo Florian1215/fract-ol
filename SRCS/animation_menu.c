@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   animation_menu.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fguirama <fguirama@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: fguirama <fguirama@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:20:40 by fguirama          #+#    #+#             */
 /*   Updated: 2023/12/04 15:20:40 by fguirama         ###   ########.fr       */
@@ -72,6 +72,8 @@ void	menu_animation(t_data *data)
 		data->menu.animation = FALSE;
 		if (data->in_menu)
 			set_menu(data);
+		else
+			data->update = TRUE; // TODO animation title
 		return ;
 	}
 	data->menu.size = get_value(data->menu.start, data->menu.end, \

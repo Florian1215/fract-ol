@@ -31,7 +31,6 @@ void	init_mlx(t_data *data)
 	init_img(&data->slide.img, NULL, data->mlx_ptr);
 	init_img(&data->img, NULL, data->mlx_ptr);
 	pthread_mutex_init(&data->mutex_line, NULL);
-	pthread_mutex_init(&data->render, NULL);
 	init_colors(data);
 }
 

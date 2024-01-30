@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   animation_reset.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fguirama <fguirama@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: fguirama <fguirama@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 19:29:38 by fguirama          #+#    #+#             */
 /*   Updated: 2023/12/04 19:29:38 by fguirama         ###   ########.fr       */
@@ -61,5 +61,4 @@ data->f->plan_default.end.x, i);
 	data->f->plan.end.y = get_value(data->f->animation_plan.end.y, \
 data->f->plan_default.end.y, i);
 	data->f->max_iter = get_value(MAX_ITER, start_max_iter, i);
-//	printf(")
 }

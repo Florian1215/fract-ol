@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   hover_animation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fguirama <fguirama@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: fguirama <fguirama@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 18:19:34 by fguirama          #+#    #+#             */
 /*   Updated: 2023/12/03 18:19:34 by fguirama         ###   ########.fr       */

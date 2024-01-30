@@ -20,7 +20,6 @@ void			zoom(t_data *data, t_bool scroll_in, t_co co);
 
 int	mouse_event_press(int button, int x, int y, t_data *data)
 {
-	pthread_mutex_lock(&data->render);
 	if (data->slide.animation || data->reset)
 		;
 	else if (data->in_menu && button == LEFT_CLICK)
@@ -30,7 +29,6 @@ int	mouse_event_press(int button, int x, int y, t_data *data)
 	}
 	else if (!data->in_menu)
 		mouse_event_fractal(data, button, (t_co){x, y});
-	pthread_mutex_unlock(&data->render);
 	return (SUCCESS);
 }
 
@@ -38,7 +36,6 @@ int	mouse_event_release(int button, int x, int y, t_data *data)
 {
 	(void)x;
 	(void)y;
-	pthread_mutex_lock(&data->render);
 	if (!data->in_menu)
 	{
 		if (button == LEFT_CLICK)
@@ -54,7 +51,6 @@ int	mouse_event_release(int button, int x, int y, t_data *data)
 			data->update = TRUE;
 		}
 	}
-	pthread_mutex_unlock(&data->render);
 	return (SUCCESS);
 }
 
@@ -62,7 +58,6 @@ int	mouse_event_motion(int x, int y, t_data *data)
 {
 	t_pos	current;
 
-	pthread_mutex_lock(&data->render);
 	if (data->slide.animation || data->reset)
 		;
 	else if (data->in_menu)
@@ -76,7 +71,6 @@ int	mouse_event_motion(int x, int y, t_data *data)
 	else if (data->edit_c)
 		data->f->c = (t_co){(double)(x - HWIN) / QWIN, (double)(y - HWIN) / \
 QWIN};
-	pthread_mutex_unlock(&data->render);
 	return (SUCCESS);
 }
 
