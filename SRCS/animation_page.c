@@ -78,8 +78,7 @@ void	render_slide(t_data *data)
 		data->slide.i = 0;
 		return ;
 	}
-	data->slide.value = get_value(data->slide.start, 0, data->slide.i++) * \
-WIN / 1000;
+	data->slide.value = get_value(data->slide.start, 0, data->slide.i++);
 	if (data->slide.side == LEFT)
 		x_from = data->slide.value + WIN;
 	else

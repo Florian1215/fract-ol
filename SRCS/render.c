@@ -64,6 +64,7 @@ static void	create_fractal(t_thread *t)
 	}
 }
 
+// TODO remake system interpolation bianaire
 static void	compute_pixel(t_thread *t, t_co *i, t_co r)
 {
 	double	col;

@@ -47,9 +47,9 @@
 # define N_FRAC						12
 # define FPS						25
 # define FRAME_ANIMATION			29
-# define WIN						1000
-# define HWIN						500
-# define QWIN						250
+# define WIN						1500
+# define HWIN						750
+# define QWIN						375
 
 # define PATH_MANDELBROT			"./ASSETS/01_mandelbrot.xpm"
 # define PATH_JULIA					"./ASSETS/02_julia.xpm"

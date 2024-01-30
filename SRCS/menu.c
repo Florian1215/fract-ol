@@ -109,7 +109,7 @@ x_offset, 0);
 
 static void	set_name_fractal(t_data *data, int x_offset, t_img *img, int i)
 {
-	const double	ratio = 0.75;
+	const double	ratio = 0.95;
 	t_co			offset;
 	t_img			*name;
 	int				i_shadow;

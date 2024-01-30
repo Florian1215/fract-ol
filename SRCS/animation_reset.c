@@ -60,5 +60,5 @@ data->f->plan_default.start.y, i);
 data->f->plan_default.end.x, i);
 	data->f->plan.end.y = get_value(data->f->animation_plan.end.y, \
 data->f->plan_default.end.y, i);
-	data->f->max_iter = get_value(MAX_ITER, start_max_iter, i);
+	data->f->max_iter = get_value(start_max_iter, MAX_ITER, i);
 }
