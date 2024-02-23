@@ -109,7 +109,6 @@ x_offset, 0);
 
 static void	set_name_fractal(t_data *data, int x_offset, t_img *img, int i)
 {
-	const double	ratio = 0.95;
 	t_co			offset;
 	t_img			*name;
 	int				i_shadow;
@@ -118,18 +117,18 @@ static void	set_name_fractal(t_data *data, int x_offset, t_img *img, int i)
 	offset = (t_co){MAX_SHADOW + QWIN + x_offset, MAX_SHADOW + QWIN};
 	if (i % 2)
 		offset.x += HWIN;
-	offset.x -= name->width * ratio / 2;
+	offset.x -= name->width * RATIO_TITLE / 2;
 	if (i >= 2)
 		offset.y += HWIN;
-	offset.y -= name->height * ratio / 2;
+	offset.y -= name->height * RATIO_TITLE / 2;
 	i_shadow = 0;
 	while (i_shadow < MAX_SHADOW)
 	{
-		draw_alpha(img, name, offset, (t_co){FG, ratio});
+		draw_alpha(img, name, offset, (t_co){FG, RATIO_TITLE});
 		offset = (t_co){offset.x - 1, offset.y - 1};
 		i_shadow++;
 	}
 	draw_alpha(img, name, (t_co){offset.x - 1, offset.y - 1}, (t_co){\
-FG, ratio});
-	draw_alpha(img, name, offset, (t_co){WHITE, ratio});
+FG, RATIO_TITLE});
+	draw_alpha(img, name, offset, (t_co){WHITE, RATIO_TITLE});
 }
