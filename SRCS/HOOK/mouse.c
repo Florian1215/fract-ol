@@ -20,12 +20,18 @@ void			zoom(t_data *data, t_bool scroll_in, t_co co);
 
 int	mouse_event_press(int button, int x, int y, t_data *data)
 {
+	t_pos	frac;
+
 	if (data->slide.animation || data->reset)
 		;
 	else if (data->in_menu && button == LEFT_CLICK)
 	{
-		data->f = data->fractals + data->menus[select_fractal((t_co){x, y})];
-		toggle_menu_animation(data);
+		frac = select_fractal((t_co){x, y});
+		if (frac != POS_ERROR)
+		{
+			data->f = data->fractals + data->menus[frac];
+			toggle_menu_animation(data);
+		}
 	}
 	else if (!data->in_menu)
 		mouse_event_fractal(data, button, (t_co){x, y});
@@ -69,8 +75,14 @@ int	mouse_event_motion(int x, int y, t_data *data)
 	else if (data->moving)
 		move(data, x, y);
 	else if (data->edit_c)
-		data->f->c = (t_co){(double)(x - HWIN) / QWIN, (double)(y - HWIN) / \
-QWIN};
+	{
+		if (data->c_animate)
+			data->f->animation_c.end = (t_co){(double)(x - HWIN) / QWIN, (\
+double)(y - HWIN) / QWIN};
+		else
+			data->f->c = (t_co){(double)(x - HWIN) / QWIN, (\
+double)(y - HWIN) / QWIN};
+	}
 	return (SUCCESS);
 }
 
@@ -78,8 +90,7 @@ static t_pos	select_fractal(t_co co)
 {
 	int	hsize;
 
-	if (co.x > WIN - 50 || co.y > WIN - 50 || co.x < 50 || \
-co.y < 50)
+	if (co.x > WIN - 50 || co.y > WIN - 50 || co.x < 50 || co.y < 50)
 		return (POS_ERROR);
 	hsize = WIN / 2;
 	if (co.x < hsize && co.y < hsize)
@@ -92,6 +103,7 @@ co.y < 50)
 		return (POS_4);
 }
 
+// TODO if left click animation
 static void	mouse_event_fractal(t_data *data, int button, t_co click)
 {
 	t_co		co;
@@ -115,6 +127,11 @@ data->f->plan.start.y)) * -1 + data->f->plan.end.y;
 	{
 		data->edit_c = TRUE;
 		data->edit = TRUE;
-		mouse_event_motion(click.x, click.y, data);
+		data->c_animate = TRUE;
+		data->f->animation_c.start = data->f->c;
+		data->f->animation_c.end = (t_co){(double)(click.x - HWIN) / QWIN, \
+		(double)(click.y - HWIN) / QWIN};
+		data->i_c = 0;
+//		mouse_event_motion(click.x, click.y, data);
 	}
 }

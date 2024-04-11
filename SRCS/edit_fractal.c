@@ -14,19 +14,16 @@
 
 void	zoom(t_data *data, t_bool scroll_in, t_co co)
 {
-	static int	i = 0;
 	double		scale;
+	double		max_iter;
 
+	scale = 1.3;
+	max_iter = 1.03;
 	if (scroll_in)
-		scale = 1 / 1.3;
-	else
-		scale = 1.3;
-	i++;
-	if (i > 5)
-	{
-		i = 0;
-		data->f->max_iter += 7 * (-1 * (scale > 1) + (scale < 1));
-	}
+		scale = 1 / scale;
+	if (!scroll_in)
+		max_iter = 1 / 1.02;
+	data->f->max_iter = (int)((double)data->f->max_iter * max_iter);
 	data->f->plan.start.x = cross_multi_plan(co.x, data->f->plan.start.x, \
 scale);
 	data->f->plan.start.y = cross_multi_plan(co.y, data->f->plan.start.y, \

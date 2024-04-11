@@ -17,6 +17,7 @@
 typedef enum e_pos				t_pos;
 typedef enum e_bool				t_bool;
 typedef enum e_preset			t_preset;
+typedef enum e_level			t_level;
 typedef enum e_colors			t_colors;
 typedef enum e_fractal			t_fractals;
 typedef enum e_appearance		t_appearance;

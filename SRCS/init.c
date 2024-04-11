@@ -19,6 +19,9 @@ void	init_mlx(t_data *data)
 	data->mlx_ptr = mlx_init();
 	data->offset_color = 0;
 	data->i_c = 0;
+	data->last_render = 0;
+	data->prev_render = FALSE;
+	data->render_level = _100;
 	data->slide.i = 0;
 	data->appearance = LIGHT;
 	data->in_menu = TRUE;

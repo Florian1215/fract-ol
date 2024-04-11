@@ -50,7 +50,7 @@ static void	create_fractal(t_thread *t)
 		pthread_mutex_lock(&t->data->mutex_line);
 		i.x = *t->line;
 		++*t->line;
-		if (t->data->edit || t->data->zoom_size)
+		if (t->data->render_level == _25)
 			++*t->line;
 		pthread_mutex_unlock(&t->data->mutex_line);
 		if (i.x >= WIN)
@@ -82,7 +82,9 @@ t->data->f->plan.start.x + i->x * r.x, t->data->f->plan.end.y - i->y * r.y});
 			mlx_put_pixel_img(&t->data->slide.img, c, col);
 		else
 			mlx_put_pixel_img(&t->data->img, c, col);
-		if (!(t->data->edit || t->data->zoom_size))
+		if (t->data->render_level == _100)
+			return ;
+		else if (t->data->render_level == _50 && k == 1)
 			return ;
 		k++;
 	}

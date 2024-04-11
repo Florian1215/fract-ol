@@ -87,6 +87,8 @@ PAV_7, PAV_8, PAV_9};
 			if (data->f->animation_c.start.x != data->f->animation_c.end.x && \
 data->f->animation_c.start.y != data->f->animation_c.end.y)
 			{
+				data->edit = FALSE;
+				data->edit_c = FALSE;
 				data->c_animate = TRUE;
 				data->i_c = 0;
 			}

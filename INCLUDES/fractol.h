@@ -150,6 +150,13 @@ enum e_preset
 	PRESET_9,
 };
 
+enum e_level
+{
+	_100 = 1,
+	_50 = 2,
+	_25 = 3,
+};
+
 struct s_fractal
 {
 	t_fractals		set;
@@ -185,6 +192,9 @@ struct s_data
 	int					page;
 	t_bool				c_animate;
 	int					i_c;
+	t_level				render_level;
+	t_time				last_render;
+	t_bool				prev_render;
 	t_bool				reset;
 	t_bool				moving;
 	t_bool				in_menu;
