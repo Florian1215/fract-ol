@@ -78,7 +78,7 @@ static void	fractal_preview(t_thread_preview *t)
 		while (i.y < WIN)
 		{
 			col = t->frac->sequence(t->data, t->frac, (t_co){\
-t->frac->plan.start.x + i.x * r.x, t->frac->plan.end.y - i.y * r.y});
+t->frac->plan.start.x + i.x * r.x, t->frac->plan.end.y - i.y * r.y}, i);
 			mlx_put_pixel_img(img, (t_co){i.x / 2 + \
 t->frac->menu.start.x, i.y / 2 + t->frac->menu.start.y}, col);
 			i.y += 2;

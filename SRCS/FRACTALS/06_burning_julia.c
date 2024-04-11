@@ -25,7 +25,7 @@ void	init_burning_julia(t_fractal *f)
 	f->offset_name = 45;
 }
 
-int	burning_julia(t_data *data, t_fractal *frac, t_co c)
+int	burning_julia(t_data *data, t_fractal *frac, t_co c, t_co co)
 {
 	t_co	z;
 	t_co	sqr;
@@ -40,7 +40,7 @@ int	burning_julia(t_data *data, t_fractal *frac, t_co c)
 		z.x = sqr.x - sqr.y - frac->c.x;
 		sqr = (t_co){pow(z.x, 2), pow(z.y, 2)};
 		if (sqr.x + sqr.y > 4)
-			return (get_color(data, frac, i, sqr.x + sqr.y));
+			return (get_color(data, frac, i, sqr.x + sqr.y, co));
 	}
 	return (FG);
 }

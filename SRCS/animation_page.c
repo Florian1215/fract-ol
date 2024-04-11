@@ -16,6 +16,11 @@ static void	init_slide_page(t_data *data, int side);
 
 void	slide_page(t_data *data, int side)
 {
+	if (data->color_animation)
+	{
+		data->try_side = side;
+		return ;
+	}
 	if (data->slide.animation)
 	{
 		if (data->slide.side == side && data->slide.i < 15)

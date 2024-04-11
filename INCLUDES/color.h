@@ -56,7 +56,8 @@ union u_color
 	struct s_rgb	rgb;
 };
 
-int			get_color(t_data *data, t_fractal *frac, int i, double sqr);
+int			get_color(t_data *data, t_fractal *frac, int i, double sqr, t_co co);
+void		color_animation(t_data *data);
 void		init_colors(t_data *data);
 void		toggle_appearance(t_data *data);
 void		edit_color(t_data *data);

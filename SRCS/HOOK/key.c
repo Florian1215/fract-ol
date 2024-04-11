@@ -89,7 +89,7 @@ data->f->animation_c.start.y != data->f->animation_c.end.y)
 			{
 				data->edit = FALSE;
 				data->edit_c = FALSE;
-				data->c_animate = TRUE;
+				data->c_animation = TRUE;
 				data->i_c = 0;
 			}
 		}

@@ -61,6 +61,7 @@ enum e_pos
 	POS_4,
 };
 
+double		side_line(t_co color_line, t_co co);
 void		cancel_animation(t_data *data);
 double		get_value(double a, double b, int i);
 int			close_mlx(t_data *data);
@@ -173,7 +174,7 @@ struct s_fractal
 	t_preset		max_preset;
 	t_img			name;
 	t_co			(*preset)(t_preset);
-	int				(*sequence)(t_data *, t_fractal *, t_co);
+	int				(*sequence)(t_data *, t_fractal *, t_co, t_co);
 };
 
 struct s_data
@@ -187,18 +188,23 @@ struct s_data
 	t_fractal			fractals[N_FRAC];
 	t_fractal			*f;
 	t_colors			color;
+	t_colors			prev_color;
+	enum e_keycode		try_side;
 	t_co				prev_pos;
 	int					offset_color;
 	int					page;
-	t_bool				c_animate;
+	t_bool				edit_c;
+	t_bool				c_animation;
 	int					i_c;
+	t_bool				color_animation;
+	t_co				color_co;
+	int					i_color;
 	t_level				render_level;
 	t_time				last_render;
 	t_bool				prev_render;
 	t_bool				reset;
 	t_bool				moving;
 	t_bool				in_menu;
-	t_bool				edit_c;
 	t_slide				slide;
 	t_bool				edit;
 	t_bool				update;
@@ -214,18 +220,18 @@ void		edit_iter(t_data *data, double j);
 void		move(t_data *data, int x, int y);
 double		cross_multi_plan(double start, double end, double scale);
 
-int			mandelbrot(t_data *data, t_fractal *frac, t_co c);
-int			julia(t_data *data, t_fractal *frac, t_co z);
-int			burning_shipe(t_data *data, t_fractal *frac, t_co c);
-int			celtic(t_data *data, t_fractal *frac, t_co c);
-int			buffalo(t_data *data, t_fractal *frac, t_co z);
-int			burning_julia(t_data *data, t_fractal *frac, t_co c);
-int			julia3(t_data *mlx, t_fractal *frac, t_co z);
-int			celtic_mandelbar(t_data *data, t_fractal *frac, t_co z);
-int			perpendicular_celtic(t_data *data, t_fractal *frac, t_co z);
-int			heart(t_data *data, t_fractal *frac, t_co z);
-int			mandelbar(t_data *data, t_fractal *frac, t_co z);
-int			celtic_mandelbrot(t_data *data, t_fractal *frac, t_co z);
+int			mandelbrot(t_data *data, t_fractal *frac, t_co c, t_co co);
+int			julia(t_data *data, t_fractal *frac, t_co z, t_co co);
+int			burning_shipe(t_data *data, t_fractal *frac, t_co c, t_co co);
+int			celtic(t_data *data, t_fractal *frac, t_co c, t_co co);
+int			buffalo(t_data *data, t_fractal *frac, t_co z, t_co co);
+int			burning_julia(t_data *data, t_fractal *frac, t_co c, t_co co);
+int			julia3(t_data *mlx, t_fractal *frac, t_co z, t_co co);
+int			celtic_mandelbar(t_data *data, t_fractal *frac, t_co z, t_co co);
+int			perpendicular_celtic(t_data *data, t_fractal *frac, t_co z, t_co co);
+int			heart(t_data *data, t_fractal *frac, t_co z, t_co co);
+int			mandelbar(t_data *data, t_fractal *frac, t_co z, t_co co);
+int			celtic_mandelbrot(t_data *data, t_fractal *frac, t_co z, t_co co);
 
 // THREAD -----------------------------------------------------------
 struct s_thread

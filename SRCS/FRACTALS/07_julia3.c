@@ -25,7 +25,7 @@ void	init_julia3(t_fractal *f)
 	f->offset_name = 35;
 }
 
-int	julia3(t_data *mlx, t_fractal *frac, t_co z)
+int	julia3(t_data *data, t_fractal *frac, t_co z, t_co co)
 {
 	int		i;
 	t_co	sqr;
@@ -38,7 +38,7 @@ int	julia3(t_data *mlx, t_fractal *frac, t_co z)
 		z.y = -z.y * z.y * z.y + 3 * sqr.x * z.y + frac->c.y;
 		sqr = (t_co){pow(z.x, 2), pow(z.y, 2)};
 		if (sqr.x + sqr.y > 4)
-			return (get_color(mlx, frac, i, sqr.x + sqr.y));
+			return (get_color(data, frac, i, sqr.x + sqr.y, co));
 	}
 	return (FG);
 }

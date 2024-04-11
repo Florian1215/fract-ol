@@ -12,6 +12,7 @@
 
 #include "fractol.h"
 
+// TODO fix bug
 void	set_page(t_data *data, int page, t_bool update)
 {
 	static t_fractals	menu[3][4] = {\

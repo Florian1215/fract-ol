@@ -67,7 +67,7 @@ static void	set_render_fractal(t_data *data, t_time start_render, \
 				t_bool *render, t_bool *full_render)
 {
 	*render = (data->edit || data->edit_c || data->zoom_size || \
-data->c_animate || data->reset || data->update);
+data->c_animation || data->color_animation || data->reset || data->update);
 	if (*render && data->prev_render)
 	{
 		data->render_level = _25;
@@ -80,10 +80,12 @@ data->render_level != _100)
 		data->render_level = _100;
 		data->prev_render = TRUE;
 	}
-	if (data->c_animate)
+	if (data->c_animation)
 		c_animation(data);
 	if (data->reset)
 		reset_animation(data);
+	if (data->color_animation)
+		color_animation(data);
 	if (*render || *full_render)
 		render_fractal(data);
 	if (data->zoom_size == 1)

@@ -16,8 +16,8 @@ static int	get_gradient(t_color *pal, int color, double op, int cat);
 
 void	set_color(t_data *data, t_colors color)
 {
+	data->prev_color = data->color;
 	data->color = (color + data->offset_color) % 12;
-	data->update = !data->in_menu;
 }
 
 void	edit_color(t_data *data)
@@ -25,8 +25,12 @@ void	edit_color(t_data *data)
 	data->offset_color = (data->offset_color + 1) % 12;
 	if (data->in_menu)
 		set_menu(data);
-	else
+	else if (!data->color_animation || data->i_color > 20)
+	{
 		set_color(data, data->f->color);
+		data->color_animation = TRUE;
+		data->i_color = 0;
+	}
 }
 
 void	toggle_appearance(t_data *data)
@@ -39,7 +43,7 @@ void	toggle_appearance(t_data *data)
 		data->update = TRUE;
 }
 
-int	get_color(t_data *data, t_fractal *frac, int i, double sqr)
+int	get_color(t_data *data, t_fractal *frac, int i, double sqr, t_co co)
 {
 	static t_color	*(*colors_set[12])(t_appearance app) = {set_green, \
 set_purple, set_electric_blue, set_red, set_blue_red, set_pink, \
@@ -66,6 +70,8 @@ set_blue, set_yellow};
 		color = 3;
 	if (data->in_menu)
 		set = (frac->color + data->offset_color) % 12;
+	else if (data->color_animation && side_line(data->color_co, co) < 0)
+		set = data->prev_color;
 	else
 		set = data->color;
 	return (get_gradient(colors_set[set](data->appearance), color, op, cat));

@@ -73,7 +73,7 @@ void	menu_animation(t_data *data)
 		if (data->in_menu)
 			set_menu(data);
 		else
-			data->update = TRUE; // TODO animation title
+			data->update = TRUE;
 		return ;
 	}
 	data->menu.size = get_value(data->menu.start, data->menu.end, \

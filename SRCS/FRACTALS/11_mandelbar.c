@@ -25,7 +25,7 @@ void	init_mandelbar(t_fractal *f)
 	f->offset_name = 30;
 }
 
-int	mandelbar(t_data *data, t_fractal *frac, t_co z)
+int	mandelbar(t_data *data, t_fractal *frac, t_co z, t_co co)
 {
 	int		i;
 	t_co	sqr;
@@ -38,7 +38,7 @@ int	mandelbar(t_data *data, t_fractal *frac, t_co z)
 		z.x = sqr.x - sqr.y + frac->c.x;
 		sqr = (t_co){pow(z.x, 2), pow(z.y, 2)};
 		if (sqr.x + sqr.y > 4)
-			return (get_color(data, frac, i, sqr.x + sqr.y));
+			return (get_color(data, frac, i, sqr.x + sqr.y, co));
 	}
 	return (FG);
 }

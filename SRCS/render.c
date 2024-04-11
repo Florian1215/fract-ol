@@ -64,15 +64,14 @@ static void	create_fractal(t_thread *t)
 	}
 }
 
-// TODO remake system interpolation bianaire
 static void	compute_pixel(t_thread *t, t_co *i, t_co r)
 {
 	double	col;
 	int		k;
 	t_co	c;
 
-	col = t->data->f->sequence(t->data, t->data->f, (t_co){\
-t->data->f->plan.start.x + i->x * r.x, t->data->f->plan.end.y - i->y * r.y});
+	col = t->data->f->sequence(t->data, t->data->f, (t_co){t->data->f->\
+plan.start.x + i->x * r.x, t->data->f->plan.end.y - i->y * r.y}, *i);
 	k = 0;
 	while (k < 4)
 	{

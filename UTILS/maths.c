@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.c                                          :+:      :+:    :+:   */
+/*   maths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fguirama <fguirama@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/02 18:36:42 by fguirama          #+#    #+#             */
-/*   Updated: 2022/12/05 14:48:22 by fguirama         ###   ########lyon.fr   */
+/*   Created: 2024/04/11 21:11:00 by fguirama          #+#    #+#             */
+/*   Updated: 2024/04/11 21:11:00 by fguirama         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-// TODO add animation darkmode
-
-void	init_mlx(t_data *data);
-void	init_fractal(t_data *data);
-void	set_hook(t_data *data);
-
-int	main(void)
+double	side_line(t_co color_line, t_co co)
 {
-	t_data	data;
-
-	init_mlx(&data);
-	init_fractal(&data);
-	set_page(&data, 0, TRUE);
-	set_hook(&data);
-	mlx_loop(data.mlx_ptr);
+	return (0 - color_line.x) * (co.x - 0) + ((color_line.y * -1) + 0) * (co.y - color_line.x);
 }

@@ -17,7 +17,7 @@ void	c_animation(t_data *data)
 	if (data->i_c == FRAME_ANIMATION)
 	{
 		data->i_c = 0;
-		data->c_animate = FALSE;
+		data->c_animation = FALSE;
 		data->f->c = data->f->animation_c.end;
 		return ;
 	}
@@ -26,6 +26,25 @@ data->f->animation_c.end.y, data->i_c);
 	data->f->c.x = get_value(data->f->animation_c.start.x, \
 data->f->animation_c.end.x, data->i_c);
 	data->i_c++;
+}
+
+void	color_animation(t_data *data)
+{
+	if (data->i_color == FRAME_ANIMATION)
+	{
+		data->i_color = 0;
+		data->color_animation = FALSE;
+		data->update = TRUE;
+		if (data->try_side)
+		{
+			slide_page(data, data->try_side);
+			data->try_side = 0;
+		}
+		return ;
+	}
+	data->color_co.x = get_value(0, WIN * 2, data->i_color);
+	data->color_co.y = get_value(50, WIN * 2 + 50, data->i_color);
+	data->i_color++;
 }
 
 double	get_value(double a, double b, int i)

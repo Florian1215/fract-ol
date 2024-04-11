@@ -76,7 +76,7 @@ int	mouse_event_motion(int x, int y, t_data *data)
 		move(data, x, y);
 	else if (data->edit_c)
 	{
-		if (data->c_animate)
+		if (data->c_animation)
 			data->f->animation_c.end = (t_co){(double)(x - HWIN) / QWIN, (\
 double)(y - HWIN) / QWIN};
 		else
@@ -103,7 +103,6 @@ static t_pos	select_fractal(t_co co)
 		return (POS_4);
 }
 
-// TODO if left click animation
 static void	mouse_event_fractal(t_data *data, int button, t_co click)
 {
 	t_co		co;
@@ -127,7 +126,7 @@ data->f->plan.start.y)) * -1 + data->f->plan.end.y;
 	{
 		data->edit_c = TRUE;
 		data->edit = TRUE;
-		data->c_animate = TRUE;
+		data->c_animation = TRUE;
 		data->f->animation_c.start = data->f->c;
 		data->f->animation_c.end = (t_co){(double)(click.x - HWIN) / QWIN, \
 		(double)(click.y - HWIN) / QWIN};
