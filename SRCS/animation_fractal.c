@@ -34,17 +34,29 @@ void	color_animation(t_data *data)
 	{
 		data->i_color = 0;
 		data->color_animation = FALSE;
-		data->update = TRUE;
-		if (data->try_side)
-		{
-			slide_page(data, data->try_side);
-			data->try_side = 0;
-		}
 		return ;
 	}
-	data->color_co.x = get_value(0, WIN * 2, data->i_color);
-	data->color_co.y = get_value(50, WIN * 2 + 50, data->i_color);
+	if (data->in_menu)
+	{
+		data->color_co.x = get_value(WIN, 0, data->i_color);
+	}
+	else
+	{
+		data->color_co.x = get_value(0, WIN * 2, data->i_color);
+		data->color_co.y = get_value(50, WIN * 2 + 50, data->i_color);
+	}
 	data->i_color++;
+}
+
+void	appearance_animation(t_data *data)
+{
+	data->i_appearance++;
+	if (data->i_appearance == FRAME_ANIMATION)
+	{
+		data->appearance_animation = FALSE;
+		data->i_appearance = 0;
+		return ;
+	}
 }
 
 double	get_value(double a, double b, int i)

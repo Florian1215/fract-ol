@@ -43,19 +43,22 @@ int	celtic(t_data *data, t_fractal *frac, t_co c, t_co co)
 	return (FG);
 }
 
-t_color	*set_electric_blue(t_appearance new_app)
-{
-	static t_color		pal[5] = {{}, {0x007882}, {0x23AA8F}, {0x86D780}, {\
-0xFAFA6E}};
-	static t_appearance	app = -1;
+#define ELECTRIC_BLUE_01	0x007882
+#define ELECTRIC_BLUE_02	0x23AA8F
+#define ELECTRIC_BLUE_03	0x86D780
+#define ELECTRIC_BLUE_04	0xFAFA6E
 
-	if (app != new_app)
-	{
-		if (new_app == DARK)
-			pal[0].color = FG;
-		else
-			pal[0].color = 0x2A4858;
-		app = new_app;
-	}
-	return (pal);
+void	init_electric_blue(t_data *data)
+{
+	data->pal[ELECTRIC_BLUE][LIGHT][0] = (t_color){0x2A4858};
+	data->pal[ELECTRIC_BLUE][LIGHT][1] = (t_color){ELECTRIC_BLUE_01};
+	data->pal[ELECTRIC_BLUE][LIGHT][2] = (t_color){ELECTRIC_BLUE_02};
+	data->pal[ELECTRIC_BLUE][LIGHT][3] = (t_color){ELECTRIC_BLUE_03};
+	data->pal[ELECTRIC_BLUE][LIGHT][4] = (t_color){ELECTRIC_BLUE_04};
+
+	data->pal[ELECTRIC_BLUE][DARK][0] = (t_color){FG};
+	data->pal[ELECTRIC_BLUE][DARK][1] = (t_color){ELECTRIC_BLUE_01};
+	data->pal[ELECTRIC_BLUE][DARK][2] = (t_color){ELECTRIC_BLUE_02};
+	data->pal[ELECTRIC_BLUE][DARK][3] = (t_color){ELECTRIC_BLUE_03};
+	data->pal[ELECTRIC_BLUE][DARK][4] = (t_color){ELECTRIC_BLUE_04};
 }

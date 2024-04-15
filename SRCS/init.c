@@ -12,8 +12,8 @@
 
 #include "fractol.h"
 
-void	init_img(t_img *img, char *path, void *mlx_ptr);
-
+void		init_img(t_img *img, char *path, void *mlx_ptr);
+static void	init_colors(t_data *data);
 void	init_mlx(t_data *data)
 {
 	data->mlx_ptr = mlx_init();
@@ -23,8 +23,8 @@ void	init_mlx(t_data *data)
 	data->prev_render = FALSE;
 	data->render_level = _100;
 	data->slide.i = 0;
-	data->try_side = 0;
 	data->appearance = LIGHT;
+	data->appearance_animation = FALSE;
 	data->in_menu = TRUE;
 	data->menu.animation = FALSE;
 	data->menu.save_img = FALSE;
@@ -36,6 +36,7 @@ void	init_mlx(t_data *data)
 	init_img(&data->img, NULL, data->mlx_ptr);
 	pthread_mutex_init(&data->mutex_line, NULL);
 	init_colors(data);
+//	init_hovers(data);
 }
 
 void	cancel_animation(t_data *data)
@@ -65,15 +66,15 @@ void	init_img(t_img *img, char *path, void *mlx_ptr)
 	img->bit_ratio = img->bits_per_pixel / 8;
 }
 
-void	init_colors(t_data *data)
+static void	init_colors(t_data *data)
 {
-	static t_color	*(*colors_set[N_FRAC])(t_appearance app) = {set_green, \
-	set_purple, set_electric_blue, set_red, set_blue_red, set_pink, \
-	set_green_blue, set_blue_light, set_pastel_pink, set_night_blue, \
-	set_blue, set_yellow};
-	int				i;
+	static void	(*init_color[N_FRAC])(t_data *) = {init_green, \
+	init_purple, init_electric_blue, init_red, init_blue_red, init_pink, \
+	init_green_blue, init_blue_light, init_pastel_pink, init_night_blue, \
+	init_blue, init_yellow};
+	int			i;
 
 	i = 0;
 	while (i < N_FRAC)
-		colors_set[i++](data->appearance);
+		init_color[i++](data);
 }

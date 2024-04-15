@@ -16,11 +16,6 @@ static void	init_slide_page(t_data *data, int side);
 
 void	slide_page(t_data *data, int side)
 {
-	if (data->color_animation)
-	{
-		data->try_side = side;
-		return ;
-	}
 	if (data->slide.animation)
 	{
 		if (data->slide.side == side && data->slide.i < 15)
@@ -73,7 +68,7 @@ static void	init_slide_page(t_data *data, int side)
 	}
 }
 
-void	render_slide(t_data *data)
+void	render_slide(t_data *data, t_bool *render)
 {
 	int	x_from;
 
@@ -92,4 +87,5 @@ void	render_slide(t_data *data)
 data->slide.value, 0);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
 data->slide.img.img, x_from, 0);
+	*render = TRUE;
 }

@@ -59,19 +59,22 @@ static t_co	preset_perpendicular_celtic(t_preset preset)
 	return ((t_co){presets[preset][0], presets[preset][1]});
 }
 
-t_color	*set_pastel_pink(t_appearance new_app)
-{
-	static t_color		pal[5] = {{}, {0xFFB3CB}, {0xF7FFAE}, {\
-0x96FBC7}, {0x74569B}};
-	static t_appearance	app = -1;
+#define PASTEL_PINK_01	0xFFB3CB
+#define PASTEL_PINK_02	0xF7FFAE
+#define PASTEL_PINK_03	0x96FBC7
+#define PASTEL_PINK_04	0x74569B
 
-	if (app != new_app)
-	{
-		if (new_app == DARK)
-			pal[0].color = FG;
-		else
-			pal[0].color = 0xD8BFD8;
-		app = new_app;
-	}
-	return (pal);
+void	init_pastel_pink(t_data *data)
+{
+	data->pal[PASTEL_PINK][LIGHT][0] = (t_color){0xD8BFD8};
+	data->pal[PASTEL_PINK][LIGHT][1] = (t_color){PASTEL_PINK_01};
+	data->pal[PASTEL_PINK][LIGHT][2] = (t_color){PASTEL_PINK_02};
+	data->pal[PASTEL_PINK][LIGHT][3] = (t_color){PASTEL_PINK_03};
+	data->pal[PASTEL_PINK][LIGHT][4] = (t_color){PASTEL_PINK_04};
+
+	data->pal[PASTEL_PINK][DARK][0] = (t_color){FG};
+	data->pal[PASTEL_PINK][DARK][1] = (t_color){PASTEL_PINK_01};
+	data->pal[PASTEL_PINK][DARK][2] = (t_color){PASTEL_PINK_02};
+	data->pal[PASTEL_PINK][DARK][3] = (t_color){PASTEL_PINK_03};
+	data->pal[PASTEL_PINK][DARK][4] = (t_color){PASTEL_PINK_04};
 }

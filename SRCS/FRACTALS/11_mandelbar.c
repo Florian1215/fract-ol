@@ -59,25 +59,21 @@ static t_co	preset_mandelbar(t_preset preset)
 	return ((t_co){presets[preset][0], presets[preset][1]});
 }
 
-t_color	*set_blue(t_appearance new_app)
-{
-	static t_color		pal[5] = {{}, {}, {0x5BACE3}, {\
-0x636AB8}, {0x574175}};
-	static t_appearance	app = -1;
+#define BLUE_02	0x5BACE3
+#define BLUE_03	0x636AB8
+#define BLUE_04	0x574175
 
-	if (app != new_app)
-	{
-		if (new_app == DARK)
-		{
-			pal[0].color = FG;
-			pal[1].color = 0x82C9FF;
-		}
-		else
-		{
-			pal[0].color = 0xF7FFED;
-			pal[1].color = 0xB5F5EC;
-		}
-		app = new_app;
-	}
-	return (pal);
+void	init_blue(t_data *data)
+{
+	data->pal[BLUE][LIGHT][0] = (t_color){0xF7FFED};
+	data->pal[BLUE][LIGHT][1] = (t_color){0xB5F5EC};
+	data->pal[BLUE][LIGHT][2] = (t_color){BLUE_02};
+	data->pal[BLUE][LIGHT][3] = (t_color){BLUE_03};
+	data->pal[BLUE][LIGHT][4] = (t_color){BLUE_04};
+
+	data->pal[BLUE][DARK][0] = (t_color){FG};
+	data->pal[BLUE][DARK][1] = (t_color){0x82C9FF};
+	data->pal[BLUE][DARK][2] = (t_color){BLUE_02};
+	data->pal[BLUE][DARK][3] = (t_color){BLUE_03};
+	data->pal[BLUE][DARK][4] = (t_color){BLUE_04};
 }

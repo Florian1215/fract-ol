@@ -56,19 +56,22 @@ static t_co	preset_celtic_mandelbar(t_preset preset)
 	return ((t_co){presets[preset][0], presets[preset][1]});
 }
 
-t_color	*set_blue_light(t_appearance new_app)
-{
-	static t_color		pal[5] = {{}, {0x8ECDE6}, {0x66A1FF}, {\
-0x6B61FF}, {0xFADDA2}};
-	static t_appearance	app = -1;
+#define BLUE_LIGHT_01	0x8ECDE6
+#define BLUE_LIGHT_02	0x66A1FF
+#define BLUE_LIGHT_03	0x6B61FF
+#define BLUE_LIGHT_04	0xFADDA2
 
-	if (app != new_app)
-	{
-		if (new_app == DARK)
-			pal[0].color = FG;
-		else
-			pal[0].color = 0xF0EFF4;
-		app = new_app;
-	}
-	return (pal);
+void	init_blue_light(t_data *data)
+{
+	data->pal[BLUE_LIGHT][LIGHT][0] = (t_color){0xF0EFF4};
+	data->pal[BLUE_LIGHT][LIGHT][1] = (t_color){BLUE_LIGHT_01};
+	data->pal[BLUE_LIGHT][LIGHT][2] = (t_color){BLUE_LIGHT_02};
+	data->pal[BLUE_LIGHT][LIGHT][3] = (t_color){BLUE_LIGHT_03};
+	data->pal[BLUE_LIGHT][LIGHT][4] = (t_color){BLUE_LIGHT_04};
+
+	data->pal[BLUE_LIGHT][DARK][0] = (t_color){FG};
+	data->pal[BLUE_LIGHT][DARK][1] = (t_color){BLUE_LIGHT_01};
+	data->pal[BLUE_LIGHT][DARK][2] = (t_color){BLUE_LIGHT_02};
+	data->pal[BLUE_LIGHT][DARK][3] = (t_color){BLUE_LIGHT_03};
+	data->pal[BLUE_LIGHT][DARK][4] = (t_color){BLUE_LIGHT_04};
 }

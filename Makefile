@@ -26,7 +26,7 @@ HEAD			=	INCLUDES/
 
 CC				=	cc
 RM				=	rm -rf
-FLAGS			=	-Wall -Wextra -Werror -pthread -O3 -MMD -MP# -fsanitize=thread -g3
+FLAGS			=	-Wall -Wextra -Werror -pthread -O3 -MMD -MP -fsanitize=address # -fsanitize=thread -g3
 
 MLX_NAME		=	libmlx.a
 
@@ -75,6 +75,6 @@ clean:
 fclean:				clean
 					$(RM) $(NAME)
 
-re:					fclean run
+re:					fclean all
 
 .PHONY:				all run dir norm mlx clean fclean re

@@ -57,19 +57,22 @@ static t_co	preset_heart(t_preset preset)
 	return ((t_co){presets[preset][0], presets[preset][1]});
 }
 
-t_color	*set_night_blue(t_appearance new_app)
-{
-	static t_color		pal[5] = {{}, {0x494D7E}, {0xC69FA5}, {\
-0xF2D3AB}, {0xFBF5EF}};
-	static t_appearance	app = -1;
+#define NIGHT_BLUE_01	0x494D7E
+#define NIGHT_BLUE_02	0xC69FA5
+#define NIGHT_BLUE_03	0xF2D3AB
+#define NIGHT_BLUE_04	0xFBF5EF
 
-	if (app != new_app)
-	{
-		if (new_app == DARK)
-			pal[0].color = FG;
-		else
-			pal[0].color = 0x272744;
-		app = new_app;
-	}
-	return (pal);
+void	init_night_blue(t_data *data)
+{
+	data->pal[NIGHT_BLUE][LIGHT][0] = (t_color){0x272744};
+	data->pal[NIGHT_BLUE][LIGHT][1] = (t_color){NIGHT_BLUE_01};
+	data->pal[NIGHT_BLUE][LIGHT][2] = (t_color){NIGHT_BLUE_02};
+	data->pal[NIGHT_BLUE][LIGHT][3] = (t_color){NIGHT_BLUE_03};
+	data->pal[NIGHT_BLUE][LIGHT][4] = (t_color){NIGHT_BLUE_04};
+
+	data->pal[NIGHT_BLUE][DARK][0] = (t_color){FG};
+	data->pal[NIGHT_BLUE][DARK][1] = (t_color){NIGHT_BLUE_01};
+	data->pal[NIGHT_BLUE][DARK][2] = (t_color){NIGHT_BLUE_02};
+	data->pal[NIGHT_BLUE][DARK][3] = (t_color){NIGHT_BLUE_03};
+	data->pal[NIGHT_BLUE][DARK][4] = (t_color){NIGHT_BLUE_04};
 }

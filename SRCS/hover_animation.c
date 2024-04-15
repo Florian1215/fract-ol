@@ -94,7 +94,6 @@ data->hover[i].zoom.end, data->hover[i].i);
 start, data->hover[i].max_iter.end, data->hover[i].i);
 		data->hover[i].i += 4;
 	}
-	set_menu(data);
 }
 
 void	zoom_hover(t_fractal *f, double scale)

@@ -12,8 +12,6 @@
 
 #include "fractol.h"
 
-// TODO add animation darkmode
-
 void	init_mlx(t_data *data);
 void	init_fractal(t_data *data);
 void	set_hook(t_data *data);

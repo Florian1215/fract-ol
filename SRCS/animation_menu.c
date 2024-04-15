@@ -14,7 +14,7 @@
 
 static void	set_menu_animation_from_menu(t_data *data);
 static void	set_menu_animation_from_fractal(t_data *data);
-void		menu_animation(t_data *data);
+void		menu_animation(t_data *data, t_bool *render);
 static void	put_resize_image(t_data *data, int size);
 
 void	toggle_menu_animation(t_data *data)
@@ -38,7 +38,6 @@ void	toggle_menu_animation(t_data *data)
 		data->menu.step.x = -1;
 	if (data->menu.pos >= 2)
 		data->menu.step.y = -1;
-	menu_animation(data);
 }
 
 static void	set_menu_animation_from_menu(t_data *data)
@@ -55,6 +54,8 @@ static void	set_menu_animation_from_menu(t_data *data)
 
 static void	set_menu_animation_from_fractal(t_data *data)
 {
+	init_hovers(data);
+	cancel_animation(data);
 	data->offset_color = data->color - data->f->color;
 	if (data->menu.animation)
 		data->menu.start = data->menu.size;
@@ -65,21 +66,26 @@ static void	set_menu_animation_from_fractal(t_data *data)
 	data->menu.animation = TRUE;
 }
 
-void	menu_animation(t_data *data)
+void	menu_animation(t_data *data, t_bool *render)
 {
 	if (data->menu.i == FRAME_ANIMATION)
 	{
 		data->menu.animation = FALSE;
-		if (data->in_menu)
-			set_menu(data);
-		else
-			data->update = TRUE;
+		data->update = TRUE;
 		return ;
 	}
 	data->menu.size = get_value(data->menu.start, data->menu.end, \
 data->menu.i++);
+	if (data->appearance_animation)
+	{
+		appearance_animation(data);
+		data->menu.save_img = TRUE;
+		set_page(data, data->page, FALSE);
+		data->menu.save_img = FALSE;
+	}
 	put_resize_image(data, data->menu.size);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
+	*render = TRUE;
 }
 
 static void	put_resize_image(t_data *data, int size)

@@ -60,19 +60,22 @@ static t_co	preset_julia3(t_preset preset)
 	return ((t_co){presets[preset][0], presets[preset][1]});
 }
 
-t_color	*set_green_blue(t_appearance new_app)
-{
-	static t_color		pal[5] = {{}, {0xE2F3E4}, {0x94E344}, {\
-0x46878F}, {0x332C50}};
-	static t_appearance	app = -1;
+#define GREEN_BLUE_01	0xE2F3E4
+#define GREEN_BLUE_02	0x94E344
+#define GREEN_BLUE_03	0x46878F
+#define GREEN_BLUE_04	0x332C50
 
-	if (app != new_app)
-	{
-		if (new_app == DARK)
-			pal[0].color = FG;
-		else
-			pal[0].color = 0xBEE4C2;
-		app = new_app;
-	}
-	return (pal);
+void	init_green_blue(t_data *data)
+{
+	data->pal[GREEN_BLUE][LIGHT][0] = (t_color){0xBEE4C2};
+	data->pal[GREEN_BLUE][LIGHT][1] = (t_color){GREEN_BLUE_01};
+	data->pal[GREEN_BLUE][LIGHT][2] = (t_color){GREEN_BLUE_02};
+	data->pal[GREEN_BLUE][LIGHT][3] = (t_color){GREEN_BLUE_03};
+	data->pal[GREEN_BLUE][LIGHT][4] = (t_color){GREEN_BLUE_04};
+
+	data->pal[GREEN_BLUE][DARK][0] = (t_color){FG};
+	data->pal[GREEN_BLUE][DARK][1] = (t_color){GREEN_BLUE_01};
+	data->pal[GREEN_BLUE][DARK][2] = (t_color){GREEN_BLUE_02};
+	data->pal[GREEN_BLUE][DARK][3] = (t_color){GREEN_BLUE_03};
+	data->pal[GREEN_BLUE][DARK][4] = (t_color){GREEN_BLUE_04};
 }

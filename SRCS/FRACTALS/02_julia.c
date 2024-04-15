@@ -58,19 +58,22 @@ static t_co	preset_julia(t_preset preset)
 	return ((t_co){presets[preset][0], presets[preset][1]});
 }
 
-t_color	*set_purple(t_appearance new_app)
-{
-	static t_color		pal[5] = {{}, {0xB6696A}, {0xE8ECF4}, {\
-0xE1E2E5}, {0xE7CE8C}};
-	static t_appearance	app = -1;
+#define PURPLE_01	0xB6696A
+#define PURPLE_02	0xE8ECF4
+#define PURPLE_03	0xE1E2E5
+#define PURPLE_04	0xE7CE8C
 
-	if (app != new_app)
-	{
-		if (new_app == DARK)
-			pal[0].color = FG;
-		else
-			pal[0].color = 0x23254C;
-		app = new_app;
-	}
-	return (pal);
+void	init_purple(t_data *data)
+{
+	data->pal[PURPLE][LIGHT][0] = (t_color){0x23254C};
+	data->pal[PURPLE][LIGHT][1] = (t_color){PURPLE_01};
+	data->pal[PURPLE][LIGHT][2] = (t_color){PURPLE_02};
+	data->pal[PURPLE][LIGHT][3] = (t_color){PURPLE_03};
+	data->pal[PURPLE][LIGHT][4] = (t_color){PURPLE_04};
+
+	data->pal[PURPLE][DARK][0] = (t_color){FG};
+	data->pal[PURPLE][DARK][1] = (t_color){PURPLE_01};
+	data->pal[PURPLE][DARK][2] = (t_color){PURPLE_02};
+	data->pal[PURPLE][DARK][3] = (t_color){PURPLE_03};
+	data->pal[PURPLE][DARK][4] = (t_color){PURPLE_04};
 }

@@ -25,12 +25,6 @@ void	set_menu(t_data *data)
 	t_pos				i;
 	t_thread_preview	t[4];
 
-	if (!data->in_menu)
-	{
-		data->in_menu = TRUE;
-		init_hovers(data);
-		cancel_animation(data);
-	}
 	render_fractals(data, t);
 	i = POS_1;
 	while (i < 4)

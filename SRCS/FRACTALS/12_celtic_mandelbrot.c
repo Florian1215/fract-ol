@@ -57,19 +57,22 @@ static t_co	preset_celtic_mandelbrot(t_preset preset)
 	return ((t_co){presets[preset][0], presets[preset][1]});
 }
 
-t_color	*set_yellow(t_appearance new_app)
-{
-	static t_color		pal[5] = {{}, {0xE8AD80}, {0xCF784C}, {\
-0xAD5845}, {0x73383E}};
-	static t_appearance	app = -1;
+#define YELLOW_01	0xE8AD80
+#define YELLOW_02	0xCF784C
+#define YELLOW_03	0xAD5845
+#define YELLOW_04	0x73383E
 
-	if (app != new_app)
-	{
-		if (new_app == DARK)
-			pal[0].color = FG;
-		else
-			pal[0].color = 0xF5E5BF;
-		app = new_app;
-	}
-	return (pal);
+void	init_yellow(t_data *data)
+{
+	data->pal[YELLOW][LIGHT][0] = (t_color){0xF5E5BF};
+	data->pal[YELLOW][LIGHT][1] = (t_color){YELLOW_01};
+	data->pal[YELLOW][LIGHT][2] = (t_color){YELLOW_02};
+	data->pal[YELLOW][LIGHT][3] = (t_color){YELLOW_03};
+	data->pal[YELLOW][LIGHT][4] = (t_color){YELLOW_04};
+
+	data->pal[YELLOW][DARK][0] = (t_color){FG};
+	data->pal[YELLOW][DARK][1] = (t_color){YELLOW_01};
+	data->pal[YELLOW][DARK][2] = (t_color){YELLOW_02};
+	data->pal[YELLOW][DARK][3] = (t_color){YELLOW_03};
+	data->pal[YELLOW][DARK][4] = (t_color){YELLOW_04};
 }

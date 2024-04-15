@@ -63,30 +63,17 @@ static t_co	preset_burning_julia(t_preset preset)
 	return ((t_co){presets[preset][0], presets[preset][1]});
 }
 
-t_color	*set_pink(t_appearance new_app)
+void	init_pink(t_data *data)
 {
-	static t_color		pal[5] = {};
-	static t_appearance	app = -1;
+	data->pal[PINK][LIGHT][0] = (t_color){0xEE7788};
+	data->pal[PINK][LIGHT][1] = (t_color){0xFFCCCC};
+	data->pal[PINK][LIGHT][2] = (t_color){0xFF99AA};
+	data->pal[PINK][LIGHT][3] = (t_color){0xCC4466};
+	data->pal[PINK][LIGHT][4] = (t_color){0x441122};
 
-	if (app != new_app)
-	{
-		if (new_app == DARK)
-		{
-			pal[0].color = FG;
-			pal[1].color = 0x333F58;
-			pal[2].color = 0x4A7A96;
-			pal[3].color = 0xEE8695;
-			pal[4].color = 0xFBBBAD;
-		}
-		else
-		{
-			pal[0].color = 0xEE7788;
-			pal[1].color = 0xFFCCCC;
-			pal[2].color = 0xFF99AA;
-			pal[3].color = 0xCC4466;
-			pal[4].color = 0x441122;
-		}
-		app = new_app;
-	}
-	return (pal);
+	data->pal[PINK][DARK][0] = (t_color){FG};
+	data->pal[PINK][DARK][1] = (t_color){0x333F58};
+	data->pal[PINK][DARK][2] = (t_color){0x4A7A96};
+	data->pal[PINK][DARK][3] = (t_color){0xEE8695};
+	data->pal[PINK][DARK][4] = (t_color){0xFBBBAD};
 }

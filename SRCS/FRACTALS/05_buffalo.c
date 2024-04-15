@@ -63,30 +63,17 @@ static t_co	preset_buffalo(t_preset preset)
 	return ((t_co){presets[preset][0], presets[preset][1]});
 }
 
-t_color	*set_blue_red(t_appearance new_app)
+void	init_blue_red(t_data *data)
 {
-	static t_color		pal[5] = {};
-	static t_appearance	app = -1;
+	data->pal[BLUE_RED][LIGHT][0] = (t_color){0x00748E};
+	data->pal[BLUE_RED][LIGHT][1] = (t_color){0xE3DFBB};
+	data->pal[BLUE_RED][LIGHT][2] = (t_color){0xF4BA4D};
+	data->pal[BLUE_RED][LIGHT][3] = (t_color){0xE3753C};
+	data->pal[BLUE_RED][LIGHT][4] = (t_color){0xDA3B3A};
 
-	if (app != new_app)
-	{
-		if (new_app == DARK)
-		{
-			pal[0].color = FG;
-			pal[1].color = 0x263248;
-			pal[2].color = 0x7E8AA2;
-			pal[3].color = 0xE3DFBB;
-			pal[4].color = 0xF0642A;
-		}
-		else
-		{
-			pal[0].color = 0x00748E;
-			pal[1].color = 0xE3DFBB;
-			pal[2].color = 0xF4BA4D;
-			pal[3].color = 0xE3753C;
-			pal[4].color = 0xDA3B3A;
-		}
-		app = new_app;
-	}
-	return (pal);
+	data->pal[BLUE_RED][DARK][0] = (t_color){FG};
+	data->pal[BLUE_RED][DARK][1] = (t_color){0x263248};
+	data->pal[BLUE_RED][DARK][2] = (t_color){0x7E8AA2};
+	data->pal[BLUE_RED][DARK][3] = (t_color){0xE3DFBB};
+	data->pal[BLUE_RED][DARK][4] = (t_color){0xF0642A};
 }

@@ -43,24 +43,21 @@ int	mandelbrot(t_data *data, t_fractal *frac, t_co c, t_co co)
 	return (FG);
 }
 
-t_color	*set_green(t_appearance new_app)
-{
-	static t_color		pal[5] = {{}, {}, {0xFFB03B}, {0xB64926}, {0x8E2800}};
-	static t_appearance	app = -1;
+#define GREEN_02	0xFFB03B
+#define GREEN_03	0xB64926
+#define GREEN_04	0x8E2800
 
-	if (app != new_app)
-	{
-		if (new_app == DARK)
-		{
-			pal[0].color = FG;
-			pal[1].color = 0x295E52;
-		}
-		else
-		{
-			pal[0].color = 0x468966;
-			pal[1].color = 0xFFF0A5;
-		}
-		app = new_app;
-	}
-	return (pal);
+void	init_green(t_data *data)
+{
+	data->pal[GREEN][LIGHT][0] = (t_color){0x468966};
+	data->pal[GREEN][LIGHT][1] = (t_color){0xFFF0A5};
+	data->pal[GREEN][LIGHT][2] = (t_color){GREEN_02};
+	data->pal[GREEN][LIGHT][3] = (t_color){GREEN_03};
+	data->pal[GREEN][LIGHT][4] = (t_color){GREEN_04};
+
+	data->pal[GREEN][DARK][0] = (t_color){FG};
+	data->pal[GREEN][DARK][1] = (t_color){0x295E52};
+	data->pal[GREEN][DARK][2] = (t_color){GREEN_02};
+	data->pal[GREEN][DARK][3] = (t_color){GREEN_03};
+	data->pal[GREEN][DARK][4] = (t_color){GREEN_04};
 }

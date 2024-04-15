@@ -43,30 +43,17 @@ int	burning_shipe(t_data *data, t_fractal *frac, t_co c, t_co co)
 	return (FG);
 }
 
-t_color	*set_red(t_appearance new_app)
+void	init_red(t_data *data)
 {
-	static t_color		pal[5] = {};
-	static t_appearance	app = -1;
+	data->pal[RED][LIGHT][0] = (t_color){0xF45D4C};
+	data->pal[RED][LIGHT][1] = (t_color){0xF7A541};
+	data->pal[RED][LIGHT][2] = (t_color){0xFACA66};
+	data->pal[RED][LIGHT][3] = (t_color){0xFEE5AD};
+	data->pal[RED][LIGHT][4] = (t_color){0xA1DBB2};
 
-	if (app != new_app)
-	{
-		if (new_app == DARK)
-		{
-			pal[0].color = FG;
-			pal[1].color = 0x374140;
-			pal[2].color = 0x817A63;
-			pal[3].color = 0xD9CB9E;
-			pal[4].color = 0xDC3522;
-		}
-		else
-		{
-			pal[0].color = 0xF45D4C;
-			pal[1].color = 0xF7A541;
-			pal[2].color = 0xFACA66;
-			pal[3].color = 0xFEE5AD;
-			pal[4].color = 0xA1DBB2;
-		}
-		app = new_app;
-	}
-	return (pal);
+	data->pal[RED][DARK][0] = (t_color){FG};
+	data->pal[RED][DARK][1] = (t_color){0x374140};
+	data->pal[RED][DARK][2] = (t_color){0x817A63};
+	data->pal[RED][DARK][3] = (t_color){0xD9CB9E};
+	data->pal[RED][DARK][4] = (t_color){0xDC3522};
 }

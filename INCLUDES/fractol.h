@@ -177,6 +177,7 @@ struct s_fractal
 	int				(*sequence)(t_data *, t_fractal *, t_co, t_co);
 };
 
+// TODO make buffer for key animation
 struct s_data
 {
 	void				*mlx_ptr;
@@ -189,7 +190,6 @@ struct s_data
 	t_fractal			*f;
 	t_colors			color;
 	t_colors			prev_color;
-	enum e_keycode		try_side;
 	t_co				prev_pos;
 	int					offset_color;
 	int					page;
@@ -197,6 +197,8 @@ struct s_data
 	t_bool				c_animation;
 	int					i_c;
 	t_bool				color_animation;
+	t_bool				appearance_animation;
+	int					i_appearance;
 	t_co				color_co;
 	int					i_color;
 	t_level				render_level;
@@ -209,6 +211,7 @@ struct s_data
 	t_bool				edit;
 	t_bool				update;
 	t_bool				zoom_size;
+	t_color				pal[12][2][5];
 	t_menu_animation	menu;
 	pthread_mutex_t		mutex_line;
 };

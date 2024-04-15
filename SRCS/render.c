@@ -35,8 +35,6 @@ void	render_fractal(t_data *data)
 	if (!data->slide.animation && !data->menu.animation)
 		mlx_put_image_to_window(data->mlx_ptr,
 			data->win_ptr, data->img.img, 0, 0);
-	if (data->update)
-		data->update = FALSE;
 }
 
 static void	create_fractal(t_thread *t)

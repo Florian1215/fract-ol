@@ -17,11 +17,12 @@ static void	set_hook_preset(t_data *data, int k);
 
 int	key_event_press(int k, t_data *data)
 {
-	if ((k == LEFT || k == RIGHT) && !data->menu.animation)
+	if ((k == LEFT || k == RIGHT) && !data->menu.animation && \
+!data->color_animation && !data->appearance_animation)
 		slide_page(data, k);
-	if (data->slide.animation)
-		return (SUCCESS);
-	if (k == D)
+	else if (data->slide.animation)
+		;
+	else if (k == D)
 		toggle_appearance(data);
 	else if (k == C)
 		edit_color(data);
@@ -38,11 +39,11 @@ int	key_event(int k, t_data *data)
 {
 	if (data->slide.animation)
 		;
-	else if (k == TAB)
+	else if (k == TAB && !data->color_animation)
 		toggle_menu_animation(data);
 	else if (k == ESQ)
 		close_mlx(data);
-	else if (data->in_menu && !data->menu.animation)
+	else if (data->in_menu && !data->menu.animation && !data->color_animation)
 		launch_fractals(data, k);
 	else if (k == Q)
 		start_reset_animation(data);

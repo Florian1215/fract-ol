@@ -12,7 +12,8 @@
 
 #include "fractol.h"
 
-static int	get_gradient(t_color *pal, int color, double op, int cat);
+static t_color	get_gradient(t_color *pal, int color, double op, int cat);
+static t_color	get_gradient_colors(t_data *data, t_color c1, t_color c2);
 
 void	set_color(t_data *data, t_colors color)
 {
@@ -22,37 +23,34 @@ void	set_color(t_data *data, t_colors color)
 
 void	edit_color(t_data *data)
 {
+	if (data->color_animation && data->i_color < 20)
+		return ;
 	data->offset_color = (data->offset_color + 1) % 12;
-	if (data->in_menu)
-		set_menu(data);
-	else if (!data->color_animation || data->i_color > 20)
-	{
+	data->color_animation = TRUE;
+	data->i_color = 0;
+	if (!data->in_menu)
 		set_color(data, data->f->color);
-		data->color_animation = TRUE;
-		data->i_color = 0;
-	}
 }
 
 void	toggle_appearance(t_data *data)
 {
+	if (data->appearance_animation)
+		return ;
 	data->appearance = !data->appearance;
-	init_colors(data);
+	data->appearance_animation = TRUE;
+	data->i_appearance = 0;
 	if (data->in_menu)
 		set_menu(data);
-	else
-		data->update = TRUE;
 }
 
 int	get_color(t_data *data, t_fractal *frac, int i, double sqr, t_co co)
 {
-	static t_color	*(*colors_set[12])(t_appearance app) = {set_green, \
-set_purple, set_electric_blue, set_red, set_blue_red, set_pink, \
-set_green_blue, set_blue_light, set_pastel_pink, set_night_blue, \
-set_blue, set_yellow};
 	t_colors		set;
 	double			op;
 	int				color;
 	int				cat;
+	t_color			gradient;
+	t_appearance	app;
 
 	op = 1 + ((log(log(2)) - log((0.5 * log(sqr)))) / log(2));
 	if (op > 0.9999)
@@ -68,16 +66,33 @@ set_blue, set_yellow};
 		color = 0;
 	else if (color >= 4)
 		color = 3;
-	if (data->in_menu)
-		set = (frac->color + data->offset_color) % 12;
-	else if (data->color_animation && side_line(data->color_co, co) < 0)
-		set = data->prev_color;
+	app = data->appearance;
+	if (data->in_menu || data->menu.animation)
+	{
+		if (data->color_animation && co.x < data->color_co.x)
+			set = (frac->color + data->offset_color - 1) % 12;
+		else
+			set = (frac->color + data->offset_color) % 12;
+	}
 	else
-		set = data->color;
-	return (get_gradient(colors_set[set](data->appearance), color, op, cat));
+	{
+		if (data->color_animation && side_line(data->color_co, co) < 0)
+		{
+			set = data->prev_color;
+			if (data->appearance_animation && data->i_appearance < data->i_color)
+				app = !app;
+		}
+		else
+			set = data->color;
+	}
+
+	gradient = get_gradient(data->pal[set][app], color, op, cat);
+	if (data->appearance_animation && app == data->appearance)
+		gradient = get_gradient_colors(data, get_gradient(data->pal[set][!data->appearance], color, op, cat), gradient);
+	return ((int)gradient.color);
 }
 
-static int	get_gradient(t_color *pal, int color, double op, int cat)
+static t_color	get_gradient(t_color *pal, int color, double op, int cat)
 {
 	t_color			col;
 
@@ -87,5 +102,15 @@ static int	get_gradient(t_color *pal, int color, double op, int cat)
 ) * ((op - cat * color) / cat));
 	col.rgb.b = pal[color].rgb.b + ((pal[color + 1].rgb.b - pal[color].rgb.b \
 ) * ((op - cat * color) / cat));
-	return ((int)col.color);
+	return (col);
+}
+
+static t_color	get_gradient_colors(t_data *data, t_color c1, t_color c2)
+{
+	t_color	res;
+
+	res.rgb.r = get_value(c1.rgb.r, c2.rgb.r, data->i_appearance);
+	res.rgb.g = get_value(c1.rgb.g, c2.rgb.g, data->i_appearance);
+	res.rgb.b = get_value(c1.rgb.b, c2.rgb.b, data->i_appearance);
+	return (res);
 }
