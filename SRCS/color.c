@@ -25,6 +25,8 @@ void	edit_color(t_data *data)
 {
 	if (data->color_animation && data->i_color < 20)
 		return ;
+	data->prev_mode = data->bw;
+	data->bw = OFF;
 	data->offset_color = (data->offset_color + 1) % 12;
 	data->color_animation = TRUE;
 	data->i_color = 0;
@@ -43,7 +45,28 @@ void	toggle_appearance(t_data *data)
 		set_menu(data);
 }
 
-int	get_color(t_data *data, t_fractal *frac, int i, double sqr, t_co co)
+void	set_bw(t_data *data, t_bw_mode bw)
+{
+	if (data->bw_animation && data->i_bw < 20)
+		return ;
+	if (data->bw == bw)
+	{
+		if (data->offset_color)
+			data->offset_color -= 1;
+		else
+			data->offset_color = YELLOW;
+		return (edit_color(data));
+	}
+	data->prev_mode = data->bw;
+	data->bw = bw;
+	data->bw_animation = TRUE;
+	data->i_bw = 0;
+	if (data->in_menu)
+		set_menu(data);
+}
+
+// TODO handle animation in menu
+int get_color(t_data *data, t_fractal *frac, int i, double sqr, t_co co, t_co z)
 {
 	t_colors		set;
 	double			op;
@@ -51,7 +74,41 @@ int	get_color(t_data *data, t_fractal *frac, int i, double sqr, t_co co)
 	int				cat;
 	t_color			gradient;
 	t_appearance	app;
+	t_bool			prev_color_color;
+	t_bool			prev_color_bw;
+	t_bool			prev_bw_bw;
+	t_bool			prev_bw_color;
+	t_bw_mode		mode;
+	t_color			bw_col;
+	t_color			other_bw_col;
 
+	prev_color_bw = data->bw_animation && side_line(data->bw_color_co, co) < 0 && !data->prev_mode;
+	prev_color_color = data->color_animation && side_line(data->color_co, co) < 0 && !data->prev_mode;
+	prev_bw_bw = data->bw_animation && side_line(data->bw_color_co, co) < 0 && data->prev_mode;
+	prev_bw_color = data->color_animation && side_line(data->color_co, co) < 0 && data->prev_mode;
+	if ((data->bw && data->appearance_animation) || (data->bw && !data->bw_animation) || (data->bw_animation && side_line(data->bw_color_co, co) > 0) || prev_bw_color || prev_bw_bw)
+	{
+		if (prev_bw_color || prev_bw_bw || prev_color_bw)
+		{
+			mode = data->prev_mode;
+		}
+		else
+			mode = data->bw;
+		if ((data->appearance == LIGHT && ((mode == X && z.x > 0) || (mode == Y && z.y > 0))) ||
+		(data->appearance == DARK && ((mode == X && z.x < 0) || (mode == Y && z.y < 0))))
+		{
+			bw_col = (t_color) {FG};
+			other_bw_col = (t_color) {WHITE};
+		}
+		else
+		{
+			bw_col = (t_color){WHITE};
+			other_bw_col = (t_color){FG};
+		}
+		if (data->appearance_animation)
+			bw_col = get_gradient_colors(data, other_bw_col, bw_col);
+		return ((int)bw_col.color);
+	}
 	op = 1 + ((log(log(2)) - log((0.5 * log(sqr)))) / log(2));
 	if (op > 0.9999)
 		op = 0.9999;
@@ -76,7 +133,7 @@ int	get_color(t_data *data, t_fractal *frac, int i, double sqr, t_co co)
 	}
 	else
 	{
-		if (data->color_animation && side_line(data->color_co, co) < 0)
+		if (prev_color_color && data->color_animation)
 		{
 			set = data->prev_color;
 			if (data->appearance_animation && data->i_appearance < data->i_color)

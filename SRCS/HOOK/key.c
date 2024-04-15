@@ -26,6 +26,10 @@ int	key_event_press(int k, t_data *data)
 		toggle_appearance(data);
 	else if (k == C)
 		edit_color(data);
+	else if (k == KEY_X)
+		set_bw(data, X);
+	else if (k == KEY_Y)
+		set_bw(data, Y);
 	if (data->reset)
 		return (ERROR);
 	else if (k == PLUS)

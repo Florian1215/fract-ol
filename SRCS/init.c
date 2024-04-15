@@ -24,6 +24,8 @@ void	init_mlx(t_data *data)
 	data->render_level = _100;
 	data->slide.i = 0;
 	data->appearance = LIGHT;
+	data->bw = OFF;
+	data->prev_mode = OFF;
 	data->appearance_animation = FALSE;
 	data->in_menu = TRUE;
 	data->menu.animation = FALSE;
@@ -50,6 +52,7 @@ void	cancel_animation(t_data *data)
 	data->zoom_size = FALSE;
 	data->c_animation = FALSE;
 	data->color_animation = FALSE;
+	data->bw_animation = FALSE;
 }
 
 void	init_img(t_img *img, char *path, void *mlx_ptr)

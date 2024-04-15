@@ -86,7 +86,7 @@ t_bool *render, t_bool *full_render)
 {
 	*render = (data->edit || data->edit_c || data->zoom_size || \
 data->c_animation || data->color_animation || data->appearance_animation || \
-data->reset || data->update);
+data->bw_animation || data->reset || data->update);
 	if (*render && data->prev_render)
 	{
 		data->render_level = _25;
@@ -107,6 +107,8 @@ data->render_level != _100)
 		color_animation(data);
 	if (data->appearance_animation)
 		appearance_animation(data);
+	if (data->bw_animation)
+		bw_animation(data);
 	if (*render || *full_render)
 		render_fractal(data);
 	if (data->zoom_size == 1)

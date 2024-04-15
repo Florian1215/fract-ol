@@ -59,6 +59,20 @@ void	appearance_animation(t_data *data)
 	}
 }
 
+void	bw_animation(t_data *data)
+{
+	if (data->i_bw == FRAME_ANIMATION)
+	{
+		data->bw_animation = FALSE;
+		data->i_bw = 0;
+		return ;
+	}
+	data->bw_color_co.x = get_value(0, WIN * 2, data->i_bw);
+	data->bw_color_co.y = get_value(50, WIN * 2 + 50, data->i_bw);
+	data->i_bw++;
+//	printf("%d\n", data->i_bw);
+}
+
 double	get_value(double a, double b, int i)
 {
 	const double	values[29] = {0.4, 1.7, 4.6, 9.8, 19, 32, 44.7, 54.7, 62.4, \

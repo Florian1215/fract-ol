@@ -43,6 +43,13 @@ enum e_appearance
 	DARK,
 };
 
+enum e_bw_mode
+{
+	OFF,
+	X,
+	Y,
+};
+
 struct s_rgb
 {
 	unsigned char	r;
@@ -56,10 +63,12 @@ union u_color
 	struct s_rgb	rgb;
 };
 
-int			get_color(t_data *data, t_fractal *frac, int i, double sqr, t_co co);
+int			get_color(t_data *data, t_fractal *frac, int i, double sqr, t_co co, t_co z);
 void		color_animation(t_data *data);
 void		appearance_animation(t_data *data);
+void		bw_animation(t_data *data);
 void		toggle_appearance(t_data *data);
+void		set_bw(t_data *data, t_bw_mode bw);
 void		edit_color(t_data *data);
 void		set_color(t_data *data, t_colors color);
 void		init_green(t_data *data);

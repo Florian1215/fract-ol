@@ -38,7 +38,7 @@ int	mandelbar(t_data *data, t_fractal *frac, t_co z, t_co co)
 		z.x = sqr.x - sqr.y + frac->c.x;
 		sqr = (t_co){pow(z.x, 2), pow(z.y, 2)};
 		if (sqr.x + sqr.y > 4)
-			return (get_color(data, frac, i, sqr.x + sqr.y, co));
+			return (get_color(data, frac, i, sqr.x + sqr.y, co, z));
 	}
 	return (FG);
 }

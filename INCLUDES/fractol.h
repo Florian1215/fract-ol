@@ -198,8 +198,13 @@ struct s_data
 	int					i_c;
 	t_bool				color_animation;
 	t_bool				appearance_animation;
+	t_bw_mode			prev_mode;
+	t_bw_mode			bw;
+	t_bool				bw_animation;
+	int					i_bw;
 	int					i_appearance;
 	t_co				color_co;
+	t_co				bw_color_co;
 	int					i_color;
 	t_level				render_level;
 	t_time				last_render;
