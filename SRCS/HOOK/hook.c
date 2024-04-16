@@ -70,13 +70,15 @@ static int	hook_loop(t_data *data)
 static void	set_render_menu(t_data *data, t_bool *render)
 {
 	*render = (data->update || is_hover_animation(data->hover) || \
-data->color_animation || data->appearance_animation);
+data->color_animation || data->appearance_animation || data->bw_animation);
 	if (is_hover_animation(data->hover))
 		hover_animation(data);
 	if (data->color_animation)
 		color_animation(data);
 	if (data->appearance_animation)
 		appearance_animation(data);
+	if (data->bw_animation)
+		bw_animation(data);
 	if (*render)
 		set_menu(data);
 }

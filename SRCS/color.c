@@ -61,8 +61,6 @@ void	set_bw(t_data *data, t_bw_mode bw)
 	data->bw = bw;
 	data->bw_animation = TRUE;
 	data->i_bw = 0;
-	if (data->in_menu)
-		set_menu(data);
 }
 
 // TODO handle animation in menu
@@ -82,13 +80,24 @@ int get_color(t_data *data, t_fractal *frac, int i, double sqr, t_co co, t_co z)
 	t_color			bw_col;
 	t_color			other_bw_col;
 
-	prev_color_bw = data->bw_animation && side_line(data->bw_color_co, co) < 0 && !data->prev_mode;
-	prev_color_color = data->color_animation && side_line(data->color_co, co) < 0 && !data->prev_mode;
-	prev_bw_bw = data->bw_animation && side_line(data->bw_color_co, co) < 0 && data->prev_mode;
-	prev_bw_color = data->color_animation && side_line(data->color_co, co) < 0 && data->prev_mode;
-	if ((data->bw && data->appearance_animation) || (data->bw && !data->bw_animation) || (data->bw_animation && side_line(data->bw_color_co, co) > 0) || prev_bw_color || prev_bw_bw)
+	if (data->in_menu)
 	{
-		if (prev_bw_color || prev_bw_bw || prev_color_bw)
+		prev_color_bw = data->bw_animation && co.x > data->bw_color_co.x && !data->prev_mode;
+		prev_color_color = data->color_animation && co.x > data->color_co.x && !data->prev_mode;
+		prev_bw_bw = data->bw_animation && co.x > data->bw_color_co.x && data->prev_mode;
+		prev_bw_color = data->color_animation && co.x > data->color_co.x && data->prev_mode;
+	}
+	else
+	{
+		prev_color_bw = data->bw_animation && side_line(data->bw_color_co, co) < 0 && !data->prev_mode;
+		prev_color_color = data->color_animation && side_line(data->color_co, co) < 0 && !data->prev_mode;
+		prev_bw_bw = data->bw_animation && side_line(data->bw_color_co, co) < 0 && data->prev_mode;
+		prev_bw_color = data->color_animation && side_line(data->color_co, co) < 0 && data->prev_mode;
+	}
+	(void)prev_color_bw;
+	if ((data->in_menu && data->bw_animation && !data->prev_mode && co.x > data->bw_color_co.x) || (data->bw && data->appearance_animation) || (data->bw && !data->bw_animation) || (data->bw_animation && side_line(data->bw_color_co, co) > 0) || prev_bw_color || prev_bw_bw)
+	{
+		if (prev_bw_color || prev_bw_bw)// || prev_color_bw)
 		{
 			mode = data->prev_mode;
 		}

@@ -67,10 +67,14 @@ void	bw_animation(t_data *data)
 		data->i_bw = 0;
 		return ;
 	}
-	data->bw_color_co.x = get_value(0, WIN * 2, data->i_bw);
-	data->bw_color_co.y = get_value(50, WIN * 2 + 50, data->i_bw);
+	if (data->in_menu)
+		data->bw_color_co.x = get_value(WIN, 0, data->i_bw);
+	else
+	{
+		data->bw_color_co.x = get_value(0, WIN * 2, data->i_bw);
+		data->bw_color_co.y = get_value(50, WIN * 2 + 50, data->i_bw);
+	}
 	data->i_bw++;
-//	printf("%d\n", data->i_bw);
 }
 
 double	get_value(double a, double b, int i)
