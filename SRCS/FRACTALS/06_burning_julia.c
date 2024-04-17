@@ -33,14 +33,16 @@ int	burning_julia(t_data *data, t_fractal *frac, t_co c, t_co co)
 
 	z = (t_co){c.x, c.y};
 	sqr = (t_co){pow(z.x, 2), pow(z.y, 2)};
-	i = -1;
-	while (++i < frac->max_iter)
+	i = 0;
+	while (i < frac->max_iter)
 	{
 		z.y = fabs(2 * z.x * z.y - frac->c.y);
 		z.x = sqr.x - sqr.y - frac->c.x;
 		sqr = (t_co){pow(z.x, 2), pow(z.y, 2)};
 		if (sqr.x + sqr.y > 4)
-			return (get_color(data, frac, i, sqr.x + sqr.y, co, z));
+			return (get_color(data, (t_color_data){frac, i, sqr.x + sqr.y}, \
+co, z));
+		i++;
 	}
 	return (FG);
 }
@@ -70,7 +72,6 @@ void	init_pink(t_data *data)
 	data->pal[PINK][LIGHT][2] = (t_color){0xFF99AA};
 	data->pal[PINK][LIGHT][3] = (t_color){0xCC4466};
 	data->pal[PINK][LIGHT][4] = (t_color){0x441122};
-
 	data->pal[PINK][DARK][0] = (t_color){FG};
 	data->pal[PINK][DARK][1] = (t_color){0x333F58};
 	data->pal[PINK][DARK][2] = (t_color){0x4A7A96};

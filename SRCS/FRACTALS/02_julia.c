@@ -30,15 +30,17 @@ int	julia(t_data *data, t_fractal *frac, t_co z, t_co co)
 	int		i;
 	t_co	sqr;
 
-	i = -1;
+	i = 0;
 	sqr = (t_co){pow(z.x, 2), pow(z.y, 2)};
-	while (++i < frac->max_iter)
+	while (i < frac->max_iter)
 	{
 		z.y = 2 * z.x * z.y - frac->c.y;
 		z.x = sqr.x - sqr.y - frac->c.x;
 		sqr = (t_co){pow(z.x, 2), pow(z.y, 2)};
 		if (sqr.x + sqr.y > 4)
-			return (get_color(data, frac, i, sqr.x + sqr.y, co, z));
+			return (get_color(data, (t_color_data){frac, i, sqr.x + sqr.y}, \
+co, z));
+		i++;
 	}
 	return (FG);
 }
@@ -70,7 +72,6 @@ void	init_purple(t_data *data)
 	data->pal[PURPLE][LIGHT][2] = (t_color){PURPLE_02};
 	data->pal[PURPLE][LIGHT][3] = (t_color){PURPLE_03};
 	data->pal[PURPLE][LIGHT][4] = (t_color){PURPLE_04};
-
 	data->pal[PURPLE][DARK][0] = (t_color){FG};
 	data->pal[PURPLE][DARK][1] = (t_color){PURPLE_01};
 	data->pal[PURPLE][DARK][2] = (t_color){PURPLE_02};

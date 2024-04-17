@@ -14,15 +14,17 @@
 
 void		init_img(t_img *img, char *path, void *mlx_ptr);
 static void	init_colors(t_data *data);
+
 void	init_mlx(t_data *data)
 {
+	data->hwin = WIN / 2;
+	data->qwin = WIN / 4;
+	data->ratio_title = WIN * 0.7 / 1000;
 	data->mlx_ptr = mlx_init();
 	data->offset_color = 0;
-	data->i_c = 0;
 	data->last_render = 0;
 	data->prev_render = FALSE;
 	data->render_level = _100;
-	data->slide.i = 0;
 	data->appearance = LIGHT;
 	data->bw = OFF;
 	data->prev_mode = OFF;
@@ -38,7 +40,6 @@ void	init_mlx(t_data *data)
 	init_img(&data->img, NULL, data->mlx_ptr);
 	pthread_mutex_init(&data->mutex_line, NULL);
 	init_colors(data);
-//	init_hovers(data);
 }
 
 void	cancel_animation(t_data *data)

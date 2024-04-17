@@ -15,10 +15,10 @@
 static void	render_fractals(t_data *data, t_thread_preview *t);
 static void	fractal_preview(t_thread_preview *t);
 void		zoom_hover(t_fractal *f, double scale);
-static void	set_names_fractal(t_data *data, void *img_ptr, int x_offset);
-static void	set_name_fractal(t_data *data, int x_offset, t_img *img, int i);
-void		draw_alpha(t_img *img, t_img *alpha, t_co pos, t_co color_ratio);
+static void	fractal_preview_line(t_thread_preview *t, t_co *i, t_co r, \
+t_img *img);
 
+void		set_names_fractal(t_data *data, void *img_ptr, int x_offset);
 
 void	set_menu(t_data *data)
 {
@@ -54,7 +54,6 @@ static void	render_fractals(t_data *data, t_thread_preview *t)
 static void	fractal_preview(t_thread_preview *t)
 {
 	t_co	i;
-	double	col;
 	t_co	r;
 	t_img	*img;
 
@@ -67,62 +66,22 @@ static void	fractal_preview(t_thread_preview *t)
 	r = get_r(t->frac);
 	i.x = 0;
 	while (i.x < WIN)
-	{
-		i.y = 0;
-		while (i.y < WIN)
-		{
-			col = t->frac->sequence(t->data, t->frac, (t_co){\
-t->frac->plan.start.x + i.x * r.x, t->frac->plan.end.y - i.y * r.y}, i);
-			mlx_put_pixel_img(img, (t_co){i.x / 2 + \
-t->frac->menu.start.x, i.y / 2 + t->frac->menu.start.y}, col);
-			i.y += 2;
-		}
-		i.x += 2;
-	}
+		fractal_preview_line(t, &i, r, img);
 }
 
-static void	set_names_fractal(t_data *data, void *img_ptr, int x_offset)
+static void	fractal_preview_line(t_thread_preview *t, t_co *i, t_co r, \
+t_img *img)
 {
-	int		i;
-	t_img	*img;
+	int	col;
 
-	if (data->slide.render_img || data->menu.save_img)
-		img = &data->slide.img;
-	else
-		img = &data->img;
-	i = 0;
-	while (i < 4)
+	i->y = 0;
+	while (i->y < WIN)
 	{
-		set_name_fractal(data, x_offset, img, i);
-		i++;
+		col = t->frac->sequence(t->data, t->frac, (t_co){\
+t->frac->plan.start.x + i->x * r.x, t->frac->plan.end.y - i->y * r.y}, *i);
+		mlx_put_pixel_img(img, (t_co){i->x / 2 + \
+t->frac->menu.start.x, i->y / 2 + t->frac->menu.start.y}, col);
+		i->y += 2;
 	}
-	if (!data->slide.animation)
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img_ptr, \
-x_offset, 0);
-}
-
-static void	set_name_fractal(t_data *data, int x_offset, t_img *img, int i)
-{
-	t_co			offset;
-	t_img			*name;
-	int				i_shadow;
-
-	name = &data->fractals[i + data->page * 4].name;
-	offset = (t_co){MAX_SHADOW + QWIN + x_offset, MAX_SHADOW + QWIN};
-	if (i % 2)
-		offset.x += HWIN;
-	offset.x -= name->width * RATIO_TITLE / 2;
-	if (i >= 2)
-		offset.y += HWIN;
-	offset.y -= name->height * RATIO_TITLE / 2;
-	i_shadow = 0;
-	while (i_shadow < MAX_SHADOW)
-	{
-		draw_alpha(img, name, offset, (t_co){FG, RATIO_TITLE});
-		offset = (t_co){offset.x - 1, offset.y - 1};
-		i_shadow++;
-	}
-	draw_alpha(img, name, (t_co){offset.x - 1, offset.y - 1}, (t_co){\
-FG, RATIO_TITLE});
-	draw_alpha(img, name, offset, (t_co){WHITE, RATIO_TITLE});
+	i->x += 2;
 }

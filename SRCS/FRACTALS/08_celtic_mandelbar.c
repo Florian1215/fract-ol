@@ -30,15 +30,17 @@ int	celtic_mandelbar(t_data *data, t_fractal *frac, t_co z, t_co co)
 	int		i;
 	t_co	sqr;
 
-	i = -1;
+	i = 0;
 	sqr = (t_co){pow(z.x, 2), pow(z.y, 2)};
-	while (++i < frac->max_iter)
+	while (i < frac->max_iter)
 	{
 		z.y = -2 * z.x * z.y + frac->c.y;
 		z.x = fabs(sqr.x - sqr.y) + frac->c.x;
 		sqr = (t_co){pow(z.x, 2), pow(z.y, 2)};
 		if (sqr.x + sqr.y > 4)
-			return (get_color(data, frac, i, sqr.x + sqr.y, co, z));
+			return (get_color(data, (t_color_data){frac, i, sqr.x + sqr.y}, \
+co, z));
+		i++;
 	}
 	return (FG);
 }
@@ -68,7 +70,6 @@ void	init_blue_light(t_data *data)
 	data->pal[BLUE_LIGHT][LIGHT][2] = (t_color){BLUE_LIGHT_02};
 	data->pal[BLUE_LIGHT][LIGHT][3] = (t_color){BLUE_LIGHT_03};
 	data->pal[BLUE_LIGHT][LIGHT][4] = (t_color){BLUE_LIGHT_04};
-
 	data->pal[BLUE_LIGHT][DARK][0] = (t_color){FG};
 	data->pal[BLUE_LIGHT][DARK][1] = (t_color){BLUE_LIGHT_01};
 	data->pal[BLUE_LIGHT][DARK][2] = (t_color){BLUE_LIGHT_02};

@@ -46,8 +46,8 @@ enum e_appearance
 enum e_bw_mode
 {
 	OFF,
-	X,
-	Y,
+	_Y,
+	_X,
 };
 
 struct s_rgb
@@ -63,10 +63,24 @@ union u_color
 	struct s_rgb	rgb;
 };
 
-int			get_color(t_data *data, t_fractal *frac, int i, double sqr, t_co co, t_co z);
+struct s_color_data
+{
+	t_fractal	*frac;
+	int			i;
+	double		sqr;
+};
+
+struct s_gradient_color_data
+{
+	double	op;
+	int		color_shade;
+	int		cat;
+};
+
+int			get_color(t_data *data, t_color_data color_data, t_co co, t_co z);
+t_color		get_gradient_colors(t_data *data, t_color c1, t_color c2);
 void		color_animation(t_data *data);
 void		appearance_animation(t_data *data);
-void		bw_animation(t_data *data);
 void		toggle_appearance(t_data *data);
 void		set_bw(t_data *data, t_bw_mode bw);
 void		edit_color(t_data *data);

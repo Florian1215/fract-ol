@@ -15,7 +15,7 @@
 
 # include "preprocessing.h"
 
-// UTILS ------------------------------------------------------------
+// UTILS -----------------------------------------------------------------------
 enum e_bool
 {
 	FALSE,
@@ -69,7 +69,7 @@ void		mlx_put_pixel_img(t_img *img, t_co co, int color);
 t_time		get_timestamp(void);
 void		sleep_until(t_time until);
 
-// MENU -------------------------------------------------------------
+// MENU ------------------------------------------------------------------------
 struct s_slide
 {
 	t_img	img;
@@ -120,7 +120,7 @@ void		set_page_value(t_data *data);
 void		slide_page(t_data *data, int side);
 void		init_hovers(t_data *data);
 
-// FRACTAL ----------------------------------------------------------
+// FRACTAL ---------------------------------------------------------------------
 enum e_fractal
 {
 	MANDELBROT,
@@ -201,10 +201,8 @@ struct s_data
 	t_bw_mode			prev_mode;
 	t_bw_mode			bw;
 	t_bool				bw_animation;
-	int					i_bw;
 	int					i_appearance;
 	t_co				color_co;
-	t_co				bw_color_co;
 	int					i_color;
 	t_level				render_level;
 	t_time				last_render;
@@ -218,6 +216,9 @@ struct s_data
 	t_bool				zoom_size;
 	t_color				pal[12][2][5];
 	t_menu_animation	menu;
+	int					hwin;
+	int					qwin;
+	int					ratio_title;
 	pthread_mutex_t		mutex_line;
 };
 
@@ -236,12 +237,13 @@ int			buffalo(t_data *data, t_fractal *frac, t_co z, t_co co);
 int			burning_julia(t_data *data, t_fractal *frac, t_co c, t_co co);
 int			julia3(t_data *mlx, t_fractal *frac, t_co z, t_co co);
 int			celtic_mandelbar(t_data *data, t_fractal *frac, t_co z, t_co co);
-int			perpendicular_celtic(t_data *data, t_fractal *frac, t_co z, t_co co);
+int			perpendicular_celtic(t_data *data, t_fractal *frac, t_co z, \
+t_co co);
 int			heart(t_data *data, t_fractal *frac, t_co z, t_co co);
 int			mandelbar(t_data *data, t_fractal *frac, t_co z, t_co co);
 int			celtic_mandelbrot(t_data *data, t_fractal *frac, t_co z, t_co co);
 
-// THREAD -----------------------------------------------------------
+// THREAD ----------------------------------------------------------------------
 struct s_thread
 {
 	t_data			*data;

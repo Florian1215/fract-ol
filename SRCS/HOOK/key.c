@@ -24,12 +24,12 @@ int	key_event_press(int k, t_data *data)
 		;
 	else if (k == D)
 		toggle_appearance(data);
+	else if (k == Z)
+		set_bw(data, _Y);
+	else if (k == X)
+		set_bw(data, _X);
 	else if (k == C)
 		edit_color(data);
-	else if (k == KEY_X)
-		set_bw(data, X);
-	else if (k == KEY_Y)
-		set_bw(data, Y);
 	if (data->reset)
 		return (ERROR);
 	else if (k == PLUS)

@@ -32,15 +32,17 @@ int	buffalo(t_data *data, t_fractal *frac, t_co z, t_co co)
 	int		i;
 	t_co	sqr;
 
-	i = -1;
+	i = 0;
 	sqr = (t_co){pow(z.x, 2), pow(z.y, 2)};
-	while (++i < frac->max_iter)
+	while (i < frac->max_iter)
 	{
 		z.y = 2 * fabs(z.x * z.y) + frac->c.y;
 		z.x = fabs(sqr.x - sqr.y) + frac->c.x;
 		sqr = (t_co){pow(z.x, 2), pow(z.y, 2)};
 		if (sqr.x + sqr.y > 4)
-			return (get_color(data, frac, i, sqr.x + sqr.y, co, z));
+			return (get_color(data, (t_color_data){frac, i, sqr.x + sqr.y}, \
+co, z));
+		i++;
 	}
 	return (FG);
 }
@@ -70,7 +72,6 @@ void	init_blue_red(t_data *data)
 	data->pal[BLUE_RED][LIGHT][2] = (t_color){0xF4BA4D};
 	data->pal[BLUE_RED][LIGHT][3] = (t_color){0xE3753C};
 	data->pal[BLUE_RED][LIGHT][4] = (t_color){0xDA3B3A};
-
 	data->pal[BLUE_RED][DARK][0] = (t_color){FG};
 	data->pal[BLUE_RED][DARK][1] = (t_color){0x263248};
 	data->pal[BLUE_RED][DARK][2] = (t_color){0x7E8AA2};

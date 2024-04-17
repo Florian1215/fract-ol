@@ -17,6 +17,10 @@ void	zoom(t_data *data, t_bool scroll_in, t_co co)
 	double		scale;
 	double		max_iter;
 
+	co.x = (double)co.x / (WIN / (data->f->plan.end.x - \
+data->f->plan.start.x)) + data->f->plan.start.x;
+	co.y = (double)co.y / (WIN / (data->f->plan.end.y - \
+data->f->plan.start.y)) * -1 + data->f->plan.end.y;
 	scale = 1.3;
 	max_iter = 1.03;
 	if (scroll_in)
@@ -30,6 +34,7 @@ scale);
 scale);
 	data->f->plan.end.x = cross_multi_plan(co.x, data->f->plan.end.x, scale);
 	data->f->plan.end.y = cross_multi_plan(co.y, data->f->plan.end.y, scale);
+	data->zoom_size++;
 }
 
 double	cross_multi_plan(double start, double end, double scale)

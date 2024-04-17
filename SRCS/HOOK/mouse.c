@@ -77,11 +77,11 @@ int	mouse_event_motion(int x, int y, t_data *data)
 	else if (data->edit_c)
 	{
 		if (data->c_animation)
-			data->f->animation_c.end = (t_co){(double)(x - HWIN) / QWIN, (\
-double)(y - HWIN) / QWIN};
+			data->f->animation_c.end = (t_co){(double)(x - data->hwin) / \
+data->qwin, (double)(y - data->hwin) / data->qwin};
 		else
-			data->f->c = (t_co){(double)(x - HWIN) / QWIN, (\
-double)(y - HWIN) / QWIN};
+			data->f->c = (t_co){(double)(x - data->hwin) / data->qwin, (\
+double)(y - data->hwin) / data->qwin};
 	}
 	return (SUCCESS);
 }
@@ -105,17 +105,8 @@ static t_pos	select_fractal(t_co co)
 
 static void	mouse_event_fractal(t_data *data, int button, t_co click)
 {
-	t_co		co;
-
 	if (button == SCROLL_IN || button == SCROLL_OUT)
-	{
-		co.x = (double)click.x / (WIN / (data->f->plan.end.x - \
-data->f->plan.start.x)) + data->f->plan.start.x;
-		co.y = (double)click.y / (WIN / (data->f->plan.end.y - \
-data->f->plan.start.y)) * -1 + data->f->plan.end.y;
-		zoom(data, button == SCROLL_IN, co);
-		data->zoom_size++;
-	}
+		zoom(data, button == SCROLL_IN, click);
 	else if (button == LEFT_CLICK)
 	{
 		data->prev_pos = click;
@@ -128,9 +119,8 @@ data->f->plan.start.y)) * -1 + data->f->plan.end.y;
 		data->edit = TRUE;
 		data->c_animation = TRUE;
 		data->f->animation_c.start = data->f->c;
-		data->f->animation_c.end = (t_co){(double)(click.x - HWIN) / QWIN, \
-		(double)(click.y - HWIN) / QWIN};
+		data->f->animation_c.end = (t_co){(double)(click.x - data->hwin) / \
+data->qwin, (double)(click.y - data->hwin) / data->qwin};
 		data->i_c = 0;
-//		mouse_event_motion(click.x, click.y, data);
 	}
 }

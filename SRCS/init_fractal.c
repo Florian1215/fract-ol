@@ -12,7 +12,7 @@
 
 #include "fractol.h"
 
-static void	init_fractal_default(t_fractal *f, int i);
+static void	init_fractal_default(t_data *data, t_fractal *f, int i);
 static t_co	default_preset(t_preset preset);
 void		init_mandelbrot(t_fractal *f);
 void		init_julia(t_fractal *f);
@@ -43,7 +43,7 @@ PATH_CELTIC_MANDELBROT};
 	i = 0;
 	while (i < N_FRAC)
 	{
-		init_fractal_default(data->fractals + i, i % 4);
+		init_fractal_default(data, data->fractals + i, i % 4);
 		init_fractals[i](data->fractals + i);
 		init_img(&data->fractals[i].name, (char *)paths[i], data->mlx_ptr);
 		data->fractals[i].plan_default = data->fractals[i].plan;
@@ -52,15 +52,15 @@ PATH_CELTIC_MANDELBROT};
 	}
 }
 
-
-static void	init_fractal_default(t_fractal *f, int i)
+static void	init_fractal_default(t_data *data, t_fractal *f, int i)
 {
 	f->plan.start = (t_co){-2, 2};
 	f->plan.end = (t_co){2, -2};
 	f->preset = default_preset;
 	f->max_iter = MAX_ITER;
-	f->menu.start = (t_co){((i % 2) == 1) * HWIN, (i >= 2) * HWIN};
-	f->menu.end = (t_co){f->menu.start.x + HWIN, f->menu.start.y + HWIN};
+	f->menu.start = (t_co){((i % 2) == 1) * data->hwin, (i >= 2) * data->hwin};
+	f->menu.end = (t_co){f->menu.start.x + data->hwin, f->menu.start.y + \
+data->hwin};
 }
 
 t_co	default_preset(t_preset preset)

@@ -30,15 +30,17 @@ int	heart(t_data *data, t_fractal *frac, t_co z, t_co co)
 	int		i;
 	t_co	sqr;
 
-	i = -1;
+	i = 0;
 	sqr = (t_co){pow(z.x, 2), pow(z.y, 2)};
-	while (++i < frac->max_iter)
+	while (i < frac->max_iter)
 	{
 		z.y = 2 * fabs(z.x) * z.y + frac->c.y;
 		z.x = sqr.x - sqr.y + frac->c.x;
 		sqr = (t_co){pow(z.x, 2), pow(z.y, 2)};
 		if (sqr.x + sqr.y > 4)
-			return (get_color(data, frac, i, sqr.x + sqr.y, co, z));
+			return (get_color(data, (t_color_data){frac, i, sqr.x + sqr.y}, \
+co, z));
+		i++;
 	}
 	return (FG);
 }
@@ -69,7 +71,6 @@ void	init_night_blue(t_data *data)
 	data->pal[NIGHT_BLUE][LIGHT][2] = (t_color){NIGHT_BLUE_02};
 	data->pal[NIGHT_BLUE][LIGHT][3] = (t_color){NIGHT_BLUE_03};
 	data->pal[NIGHT_BLUE][LIGHT][4] = (t_color){NIGHT_BLUE_04};
-
 	data->pal[NIGHT_BLUE][DARK][0] = (t_color){FG};
 	data->pal[NIGHT_BLUE][DARK][1] = (t_color){NIGHT_BLUE_01};
 	data->pal[NIGHT_BLUE][DARK][2] = (t_color){NIGHT_BLUE_02};
