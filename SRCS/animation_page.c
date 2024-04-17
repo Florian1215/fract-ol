@@ -18,9 +18,8 @@ void	slide_page(t_data *data, int side)
 {
 	if (data->slide.animation)
 	{
-		if (data->slide.side == side && data->slide.i < 15)
+		if (data->slide.side == side)
 			return ;
-		data->slide.i = 0;
 		if (side == LEFT)
 			data->slide.start = data->slide.value - WIN;
 		else
@@ -32,6 +31,7 @@ void	slide_page(t_data *data, int side)
 		if (side == LEFT)
 			data->slide.start *= -1;
 	}
+	data->slide.i = 0;
 	data->slide.animation = TRUE;
 	data->slide.render_img = TRUE;
 	if (data->in_menu)

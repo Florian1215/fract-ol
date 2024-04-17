@@ -16,7 +16,7 @@ OBJS_DIR		=	.OBJS/
 SRCS			=	SRCS/animation_fractal.c SRCS/animation_menu.c SRCS/animation_page.c  SRCS/animation_reset.c SRCS/color.c SRCS/color_gradient.c SRCS/color_render.c SRCS/edit_fractal.c SRCS/hover_animation.c SRCS/hover_hook.c SRCS/init.c SRCS/init_fractal.c SRCS/menu.c SRCS/menu_name.c SRCS/page_menu.c SRCS/render.c SRCS/render_fractal.c \
 					SRCS/FRACTALS/01_mandelbrot.c SRCS/FRACTALS/02_julia.c SRCS/FRACTALS/03_celtic.c SRCS/FRACTALS/04_burning_ship.c SRCS/FRACTALS/05_buffalo.c SRCS/FRACTALS/06_burning_julia.c SRCS/FRACTALS/07_julia3.c SRCS/FRACTALS/08_celtic_mandelbar.c SRCS/FRACTALS/09_perpendicular_celtic.c SRCS/FRACTALS/10_heart.c SRCS/FRACTALS/11_mandelbar.c SRCS/FRACTALS/12_celtic_mandelbrot.c \
 					SRCS/HOOK/hook.c SRCS/HOOK/key.c SRCS/HOOK/mouse.c \
-					UTILS/maths.c UTILS/mlx.c UTILS/time.c \
+					UTILS/maths.c UTILS/mem.c UTILS/mlx.c UTILS/time.c \
 					main.c
 DEP				=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.d))
 OBJS			=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))

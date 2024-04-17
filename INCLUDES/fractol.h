@@ -61,6 +61,7 @@ enum e_pos
 	POS_4,
 };
 
+t_bool		mem_cmp(const void *s1, const void *s2, size_t n);
 double		side_line(t_co color_line, t_co co);
 void		cancel_animation(t_data *data);
 double		get_value(double a, double b, int i);
