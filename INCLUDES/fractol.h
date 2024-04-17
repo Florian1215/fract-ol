@@ -219,7 +219,7 @@ struct s_data
 	t_menu_animation	menu;
 	int					hwin;
 	int					qwin;
-	int					ratio_title;
+	double				ratio_title;
 	pthread_mutex_t		mutex_line;
 };
 
