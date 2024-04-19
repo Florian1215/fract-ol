@@ -17,8 +17,8 @@ static void	init_slide_page(t_data *data, int side);
 void	slide_page(t_data *data, int side)
 {
 	if (data->menu.animation || data->color_animation || \
-data->appearance_animation || data->bw_animation || (data->slide.animation && \
-data->slide.side == side))
+data->appearance_animation || data->bw_animation || (data->slide.animation && (\
+data->slide.side == side || data->slide.i < 8)))
 		return (lst_new(data, side));
 	if (data->slide.animation && side == LEFT)
 		data->slide.start = data->slide.value - WIN;
@@ -31,6 +31,7 @@ data->slide.side == side))
 			data->slide.start *= -1;
 	}
 	data->slide.i = 0;
+	data->slide.side = side;
 	data->slide.animation = TRUE;
 	data->slide.render_img = TRUE;
 	if (data->in_menu)
@@ -38,7 +39,6 @@ data->slide.side == side))
 	else
 		render_fractal(data);
 	data->slide.render_img = FALSE;
-	data->slide.side = side;
 	init_slide_page(data, side);
 }
 
