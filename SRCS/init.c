@@ -17,6 +17,8 @@ static void	init_colors(t_data *data);
 
 void	init_mlx(t_data *data)
 {
+	data->kbuff = NULL;
+	data->is_key_buff = FALSE;
 	data->hwin = WIN / 2;
 	data->qwin = WIN / 4;
 	data->ratio_title = WIN * 0.7 / 1000;

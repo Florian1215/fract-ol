@@ -22,7 +22,7 @@ enum e_bool
 	TRUE,
 };
 
-enum e_exit_status
+enum e_exit
 {
 	SUCCESS,
 	ERROR
@@ -52,6 +52,12 @@ struct s_delta
 	t_co	end;
 };
 
+struct s_list
+{
+	int		k;
+	t_list	*next;
+};
+
 enum e_pos
 {
 	POS_ERROR = -1,
@@ -61,7 +67,9 @@ enum e_pos
 	POS_4,
 };
 
-t_bool		mem_cmp(const void *s1, const void *s2, size_t n);
+void		lst_new(t_data *data, int k);
+void		lst_clear(t_list **lst);
+t_bool		mem_cmp(const void *s1, const void *s2);
 double		side_line(t_co color_line, t_co co);
 void		cancel_animation(t_data *data);
 double		get_value(double a, double b, int i);
@@ -178,7 +186,6 @@ struct s_fractal
 	int				(*sequence)(t_data *, t_fractal *, t_co, t_co);
 };
 
-// TODO make buffer for key animation
 struct s_data
 {
 	void				*mlx_ptr;
@@ -220,6 +227,8 @@ struct s_data
 	int					hwin;
 	int					qwin;
 	double				ratio_title;
+	t_list				*kbuff;
+	t_bool				is_key_buff;
 	pthread_mutex_t		mutex_line;
 };
 

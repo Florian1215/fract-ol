@@ -21,6 +21,8 @@ void	toggle_menu_animation(t_data *data)
 {
 	t_bool	menu;
 
+	if (data->color_animation || data->bw_animation)
+		return (lst_new(data, TAB));
 	if (data->in_menu)
 		set_menu_animation_from_menu(data);
 	else

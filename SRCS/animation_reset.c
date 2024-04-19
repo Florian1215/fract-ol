@@ -16,8 +16,7 @@ static void		compute_value(t_data *data, int i, int start_max_iter);
 
 t_bool	start_reset_animation(t_data *data)
 {
-	if (data->reset || !mem_cmp(&data->f->plan, &data->f->plan_default, \
-sizeof(t_delta)))
+	if (data->reset || !mem_cmp(&data->f->plan, &data->f->plan_default))
 		return (FALSE);
 	data->reset = TRUE;
 	return (TRUE);

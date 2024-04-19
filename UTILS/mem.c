@@ -12,10 +12,12 @@
 
 #include "fractol.h"
 
-t_bool	mem_cmp(const void *s1, const void *s2, size_t n)
+t_bool	mem_cmp(const void *s1, const void *s2)
 {
 	size_t	i;
+	size_t	n;
 
+	n = sizeof(*s1);
 	i = 0;
 	while (i < n && *(unsigned char *)(s1 + i) == *(unsigned char *)(s2 + i))
 		i++;

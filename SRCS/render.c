@@ -12,6 +12,7 @@
 
 #include "fractol.h"
 
+void		exec_key_buff(t_data *data);
 void		render_slide(t_data *data, t_bool *render);
 void		menu_animation(t_data *data, t_bool *render);
 static void	set_render_menu(t_data *data, t_bool *render);
@@ -23,7 +24,6 @@ static void	set_full_render(t_data *data, t_time start_render, t_bool *render, \
 t_bool *full_render);
 void		c_animation(t_data *data);
 void		reset_animation(t_data *data);
-
 static void	set_render_level(t_data *data, t_bool full_render, \
 				t_time time_render);
 
@@ -36,6 +36,8 @@ int	hook_loop(t_data *data)
 	render = FALSE;
 	full_render = FALSE;
 	start_render = get_timestamp();
+	if (data->kbuff)
+		exec_key_buff(data);
 	if (data->menu.animation)
 		menu_animation(data, &render);
 	else if (data->slide.animation)

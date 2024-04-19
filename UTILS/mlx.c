@@ -64,6 +64,7 @@ int	close_mlx(t_data *data)
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_display(data->mlx_ptr);
 	pthread_mutex_destroy(&data->mutex_line);
+	lst_clear(&data->kbuff);
 	free(data->mlx_ptr);
 	exit(SUCCESS);
 }

@@ -21,7 +21,7 @@ void	set_color(t_data *data, t_colors color)
 void	edit_color(t_data *data)
 {
 	if (data->color_animation || data->bw_animation)
-		return ;
+		return (lst_new(data, C));
 	data->prev_mode = data->bw;
 	data->bw = OFF;
 	data->offset_color = (data->offset_color + 1) % 12;
@@ -34,7 +34,7 @@ void	edit_color(t_data *data)
 void	toggle_appearance(t_data *data)
 {
 	if (data->appearance_animation)
-		return ;
+		return (lst_new(data, D));
 	data->appearance = !data->appearance;
 	data->appearance_animation = TRUE;
 	data->i_appearance = 0;
@@ -42,10 +42,16 @@ void	toggle_appearance(t_data *data)
 		set_menu(data);
 }
 
-void	set_bw(t_data *data, t_bw_mode bw)
+void	set_bw(t_data *data, int k)
 {
+	t_bw_mode	bw;
+
 	if (data->bw_animation || data->color_animation)
-		return ;
+		return (lst_new(data, k));
+	if (k == X)
+		bw = _X;
+	else
+		bw = _Y;
 	if (data->bw == bw)
 	{
 		if (data->offset_color)

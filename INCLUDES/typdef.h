@@ -16,6 +16,7 @@
 // TYPEDEF ------------------------------------------------
 typedef enum e_pos						t_pos;
 typedef enum e_bool						t_bool;
+typedef enum e_exit						t_exit;
 typedef enum e_preset					t_preset;
 typedef enum e_level					t_level;
 typedef enum e_colors					t_colors;
@@ -26,6 +27,7 @@ typedef union u_color					t_color;
 typedef struct s_co						t_co;
 typedef struct s_data					t_data;
 typedef struct s_img					t_img;
+typedef struct s_list					t_list;
 typedef struct s_delta					t_delta;
 typedef struct s_slide					t_slide;
 typedef struct s_hover					t_hover;

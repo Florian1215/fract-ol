@@ -12,7 +12,6 @@
 
 #include "fractol.h"
 
-int	key_event_press(int k, t_data *data);
 int	mouse_event_press(int button, int x, int y, t_data *data);
 int	mouse_event_release(int button, int x, int y, t_data *data);
 int	mouse_event_motion(int x, int y, t_data *data);
@@ -21,7 +20,6 @@ int	hook_loop(t_data *data);
 
 void	set_hook(t_data *data)
 {
-	mlx_hook(data->win_ptr, 2, (1L << 0), key_event_press, data);
 	mlx_hook(data->win_ptr, 4, (1L << 2), mouse_event_press, data);
 	mlx_hook(data->win_ptr, 5, (1L << 3), mouse_event_release, data);
 	mlx_hook(data->win_ptr, 6, (1L << 6), mouse_event_motion, data);

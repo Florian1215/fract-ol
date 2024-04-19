@@ -82,7 +82,7 @@ t_color		get_gradient_colors(t_data *data, t_color c1, t_color c2);
 void		color_animation(t_data *data);
 void		appearance_animation(t_data *data);
 void		toggle_appearance(t_data *data);
-void		set_bw(t_data *data, t_bw_mode bw);
+void		set_bw(t_data *data, int k);
 void		edit_color(t_data *data);
 void		set_color(t_data *data, t_colors color);
 void		init_green(t_data *data);

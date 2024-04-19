@@ -16,15 +16,14 @@ static void	init_slide_page(t_data *data, int side);
 
 void	slide_page(t_data *data, int side)
 {
-	if (data->slide.animation)
-	{
-		if (data->slide.side == side)
-			return ;
-		if (side == LEFT)
-			data->slide.start = data->slide.value - WIN;
-		else
-			data->slide.start = data->slide.value + WIN;
-	}
+	if (data->menu.animation || data->color_animation || \
+data->appearance_animation || data->bw_animation || (data->slide.animation && \
+data->slide.side == side))
+		return (lst_new(data, side));
+	if (data->slide.animation && side == LEFT)
+		data->slide.start = data->slide.value - WIN;
+	else if (data->slide.animation && side == RIGHT)
+		data->slide.start = data->slide.value + WIN;
 	else
 	{
 		data->slide.start = WIN;
