@@ -22,16 +22,17 @@ void	render_fractal(t_data *data)
 	t_thread		t[8];
 
 	line = 0;
-	i = -1;
-	while (++i < 8)
+	i = 0;
+	while (i < 8)
 	{
 		t[i].line = &line;
 		t[i].data = data;
 		pthread_create(&t[i].thread, NULL, (void *)create_fractal, &t[i]);
+		i++;
 	}
-	i = -1;
-	while (++i < 8)
-		pthread_join(t[i].thread, NULL);
+	i = 0;
+	while (i < 8)
+		pthread_join(t[i++].thread, NULL);
 	if (!data->slide.animation && !data->menu.animation)
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
 data->img.img, 0, 0);
