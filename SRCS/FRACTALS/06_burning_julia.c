@@ -22,7 +22,6 @@ void	init_burning_julia(t_fractal *f)
 	f->preset = preset_burning_julia;
 	f->max_preset = PRESET_9;
 	f->color = PINK;
-	f->offset_name = 45;
 }
 
 int	burning_julia(t_data *data, t_fractal *frac, t_co c, t_co co)

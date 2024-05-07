@@ -29,12 +29,10 @@
 # include "typdef.h"
 
 # ifdef __APPLE__
-#  define APPLE 1
 #  include "../mlx/mac/mlx.h"
 # endif
 
 # ifdef __linux__
-#  define APPLE 0
 #  include "../mlx/linux/mlx.h"
 # endif
 

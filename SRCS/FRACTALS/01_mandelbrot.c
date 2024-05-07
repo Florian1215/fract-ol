@@ -20,7 +20,6 @@ void	init_mandelbrot(t_fractal *f)
 	f->sequence = mandelbrot;
 	f->max_preset = PRESET_0;
 	f->color = GREEN;
-	f->offset_name = 20;
 }
 
 int	mandelbrot(t_data *data, t_fractal *frac, t_co c, t_co co)

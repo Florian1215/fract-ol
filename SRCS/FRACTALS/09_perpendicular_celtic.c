@@ -22,7 +22,6 @@ void	init_perpendicular_celtic(t_fractal *f)
 	f->preset = preset_perpendicular_celtic;
 	f->max_preset = PRESET_7;
 	f->color = PASTEL_PINK;
-	f->offset_name = 60;
 }
 
 int	perpendicular_celtic(t_data *data, t_fractal *frac, t_co z, t_co co)

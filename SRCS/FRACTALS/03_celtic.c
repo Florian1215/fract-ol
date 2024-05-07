@@ -20,7 +20,6 @@ void	init_celtic(t_fractal *f)
 	f->sequence = celtic;
 	f->color = ELECTRIC_BLUE;
 	f->max_preset = PRESET_0;
-	f->offset_name = 18;
 }
 
 int	celtic(t_data *data, t_fractal *frac, t_co c, t_co co)

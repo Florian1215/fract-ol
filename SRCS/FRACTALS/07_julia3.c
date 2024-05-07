@@ -22,7 +22,6 @@ void	init_julia3(t_fractal *f)
 	f->preset = preset_julia3;
 	f->max_preset = PRESET_8;
 	f->color = GREEN_BLUE;
-	f->offset_name = 35;
 }
 
 int	julia3(t_data *data, t_fractal *frac, t_co z, t_co co)

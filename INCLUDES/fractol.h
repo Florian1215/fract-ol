@@ -178,7 +178,6 @@ struct s_fractal
 	t_delta			plan_start_hover;
 	t_delta			animation_plan;
 	t_delta			menu;
-	int				offset_name;
 	int				max_iter;
 	t_preset		max_preset;
 	t_img			name;

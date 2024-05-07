@@ -20,7 +20,6 @@ void	init_burning_shipe(t_fractal *f)
 	f->sequence = burning_shipe;
 	f->max_preset = PRESET_0;
 	f->color = RED;
-	f->offset_name = 36;
 }
 
 int	burning_shipe(t_data *data, t_fractal *frac, t_co c, t_co co)

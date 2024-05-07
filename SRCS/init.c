@@ -62,7 +62,7 @@ void	init_img(t_img *img, char *path, void *mlx_ptr)
 {
 	if (path)
 		img->img = mlx_xpm_file_to_image(mlx_ptr, path, \
-	&img->width, &img->height);
+&img->width, &img->height);
 	else
 		img->img = mlx_new_image(mlx_ptr, WIN, WIN);
 	if (!img->img)
@@ -75,9 +75,9 @@ void	init_img(t_img *img, char *path, void *mlx_ptr)
 static void	init_colors(t_data *data)
 {
 	static void	(*init_color[N_FRAC])(t_data *) = {init_green, \
-	init_purple, init_electric_blue, init_red, init_blue_red, init_pink, \
-	init_green_blue, init_blue_light, init_pastel_pink, init_night_blue, \
-	init_blue, init_yellow};
+init_purple, init_electric_blue, init_red, init_blue_red, init_pink, \
+init_green_blue, init_blue_light, init_pastel_pink, init_night_blue, \
+init_blue, init_yellow};
 	int			i;
 
 	i = 0;

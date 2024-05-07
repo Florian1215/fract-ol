@@ -22,7 +22,6 @@ void	init_celtic_mandelbar(t_fractal *f)
 	f->preset = preset_celtic_mandelbar;
 	f->max_preset = PRESET_4;
 	f->color = BLUE_LIGHT;
-	f->offset_name = 50;
 }
 
 int	celtic_mandelbar(t_data *data, t_fractal *frac, t_co z, t_co co)
