@@ -1,6 +1,6 @@
 .idea
 .OBJS/
-cub3D
+fractol
 libmlx.a
 libmlx_Linux.a
 main.o
