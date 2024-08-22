@@ -1,0 +1,7 @@
+.idea
+.OBJS/
+cub3D
+libmlx.a
+libmlx_Linux.a
+main.o
+mlx-test
