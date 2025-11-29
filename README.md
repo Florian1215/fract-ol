@@ -54,13 +54,13 @@ Le projet contient **12 fractales**, par exemple :
 
 ## 📸 Aperçus
 
-Video YouTube : [youtu.be/sgwxkQ0lG_8](https://youtu.be/sgwxkQ0lG_8)
+Video YouTube : [youtu.be/awyME3ICtsY](https://youtu.be/awyME3ICtsY)
 
 ![ImageMandelbrot](IMAGES/img1.png)
 ![ImageJulia](IMAGES/img2.png)
-![VideoZoom](IMAGES/gif2.gif)
+![VideoColorMode](IMAGES/gif4.gif)
 ![VideoCouleur](IMAGES/gif1.gif)
 ![VideoChangeX](IMAGES/gif3.gif)
-![VideoColorMode](IMAGES/gif4.gif)
+![VideoZoom](IMAGES/gif2.gif)
 
 Bonne exploration ! 🌈 - fguirama 
