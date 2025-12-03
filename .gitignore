@@ -3,5 +3,5 @@
 fractol
 libmlx.a
 libmlx_Linux.a
-main.o
+*.o
 mlx-test
