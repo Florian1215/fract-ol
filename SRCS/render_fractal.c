@@ -19,11 +19,11 @@ void	render_fractal(t_data *data)
 {
 	int				i;
 	int				line;
-	t_thread		t[8];
+	t_thread		t[MAX_THREAD];
 
 	line = 0;
 	i = 0;
-	while (i < 8)
+	while (i < MAX_THREAD)
 	{
 		t[i].line = &line;
 		t[i].data = data;
@@ -31,7 +31,7 @@ void	render_fractal(t_data *data)
 		i++;
 	}
 	i = 0;
-	while (i < 8)
+	while (i < MAX_THREAD)
 		pthread_join(t[i++].thread, NULL);
 	if (!data->slide.animation && !data->menu.animation)
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
