@@ -48,6 +48,12 @@ all:				mlx $(NAME)
 run:				all
 					./$(NAME)
 
+leaks:				all
+					valgrind --leak-check=full --track-origins=yes ./$(NAME)
+
+datarace:			all
+					valgrind --tool=helgrind --track-lockorders=yes ./$(NAME)
+
 norm:
 					norminette $(SRCS) $(HEAD)/*.h | grep -E "(Error|Warning)"
 
