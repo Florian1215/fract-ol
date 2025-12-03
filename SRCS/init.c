@@ -15,26 +15,15 @@
 void		init_img(t_img *img, char *path, void *mlx_ptr);
 static void	init_colors(t_data *data);
 
-void	init_mlx(t_data *data)
+void	init_data(t_data *data)
 {
-	data->kbuff = NULL;
-	data->is_key_buff = FALSE;
+	ft_bzero(data, sizeof(t_data));
 	data->hwin = WIN / 2;
 	data->qwin = WIN / 4;
 	data->ratio_title = WIN * 0.7 / 1000;
 	data->mlx_ptr = mlx_init();
-	data->offset_color = 0;
-	data->last_render = 0;
-	data->prev_render = FALSE;
 	data->render_level = _100;
-	data->appearance = LIGHT;
-	data->bw = OFF;
-	data->prev_mode = OFF;
-	data->appearance_animation = FALSE;
 	data->in_menu = TRUE;
-	data->menu.animation = FALSE;
-	data->menu.save_img = FALSE;
-	data->slide.render_img = FALSE;
 	cancel_animation(data);
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIN, WIN, \
 "Fract-ol");

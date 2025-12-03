@@ -54,6 +54,7 @@ PATH_CELTIC_MANDELBROT};
 
 static void	init_fractal_default(t_data *data, t_fractal *f, int i)
 {
+	ft_bzero(f, sizeof(t_fractal));
 	f->plan.start = (t_co){-2, 2};
 	f->plan.end = (t_co){2, -2};
 	f->preset = default_preset;

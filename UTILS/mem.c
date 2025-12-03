@@ -25,3 +25,12 @@ t_bool	mem_cmp(const void *s1, const void *s2)
 		return (TRUE);
 	return (FALSE);
 }
+
+void	ft_bzero(void *b, const size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+		*(unsigned char *)(b + i) = 0;
+}

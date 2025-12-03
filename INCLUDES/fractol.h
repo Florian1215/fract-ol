@@ -77,6 +77,7 @@ int			close_mlx(t_data *data);
 void		mlx_put_pixel_img(t_img *img, t_co co, int color);
 t_time		get_timestamp(void);
 void		sleep_until(t_time until);
+void		ft_bzero(void *s, size_t n);
 
 // MENU ------------------------------------------------------------------------
 struct s_slide
