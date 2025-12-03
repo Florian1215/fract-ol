@@ -11,11 +11,10 @@
 /* ************************************************************************** */
 
 #include "fractol.h"
-
 #if defined(__APPLE__)
-static void mlx_destroy_display(void *data);
-#endif
 
+static void	mlx_destroy_display(void *data);
+#endif
 
 void	mlx_put_pixel_img(t_img *img, t_co co, int color)
 {
@@ -75,7 +74,8 @@ int	close_mlx(t_data *data)
 }
 
 #if defined(__APPLE__)
-static void mlx_destroy_display(void *data)
+
+static void	mlx_destroy_display(void *data)
 {
 	(void)data;
 }
