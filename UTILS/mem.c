@@ -32,5 +32,8 @@ void	ft_bzero(void *b, const size_t n)
 
 	i = 0;
 	while (i < n)
+	{
 		*(unsigned char *)(b + i) = 0;
+		i++;
+	}
 }
